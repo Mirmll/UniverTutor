@@ -149,28 +149,37 @@
       margin: 22px 0
     }
 
-     header {
+    header {
       background: #171924;
       padding: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
     }
+
     header h1 {
       margin: 0;
       font-size: 20px;
     }
+
+    nav {
+      margin-top: 10px;
+    }
+
     nav a {
       color: #f1f1f1;
       text-decoration: none;
-      margin-left: 20px;
+      margin: 6px 12px;
       font-weight: bold;
+      display: inline-block;
     }
+
     nav a:hover {
       color: #ffcc66;
     }
-    
+
     .links {
       display: flex;
       justify-content: center;
@@ -195,20 +204,125 @@
       padding: 20px;
       text-align: center;
     }
+
+    /* Видео-блоки рядом */
+    .videos {
+      display: grid;
+      gap: 20px;
+    }
+
+    /* 📱 Телефоны */
+    @media (max-width: 599px) {
+      body {
+        font-size: 15px;
+      }
+
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        margin-top: 12px;
+      }
+
+      nav a {
+        margin: 8px;
+        font-size: 15px;
+      }
+
+      .wrap {
+        padding: 20px 14px;
+      }
+
+      .tips {
+        grid-template-columns: 1fr;
+      }
+
+      .videos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 📲 Планшеты */
+    @media (min-width: 600px) and (max-width: 991px) {
+      body {
+        font-size: 17px;
+      }
+
+      header {
+        flex-direction: row;
+        text-align: left;
+      }
+
+      nav {
+        margin-top: 0;
+      }
+
+      nav a {
+        font-size: 16px;
+      }
+
+      .wrap {
+        padding: 40px 30px;
+      }
+
+      .tips {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .videos {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* 💻 Компьютеры */
+    @media (min-width: 992px) {
+      body {
+        font-size: 18px;
+      }
+
+      header {
+        padding: 20px 40px;
+      }
+
+      nav a {
+        margin-left: 24px;
+        font-size: 18px;
+      }
+
+      .wrap {
+        padding: 50px;
+        max-width: 1200px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .tips {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .videos {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 </head>
 
 <body>
- <header>
-  <h1>Университет RPM</h1>
-  <nav>
-    <a href="index.html">2FA + TGprotect</a>
-    <a href="locker.html">Раздевалки</a>
-    <a href="sync.html">Синхронизация</a>
-  </nav>
-</header>
+  <header>
+    <h1>Университет RPM</h1>
+    <nav>
+      <a href="index.html">2FA + TGprotect</a>
+      <a href="locker.html">Раздевалки</a>
+      <a href="sync.html">Синхронизация</a>
+    </nav>
+  </header>
+
 
   <main class="wrap">
     <h1>2FA и TG Protect</h1>
@@ -241,59 +355,46 @@
       </div>
     </div>
 
-    <!-- <section class="grid">
-      <article class="card">
-        <h2>Как включить 2FA (коротко)</h2>
-        <a class="cta" href="#video-2fa">Смотреть видео</a>
-      </article>
-
-      <article class="card">
-        <h2>Как настроить TG Protect (коротко)</h2>
-        <a class="cta" href="#video-tgprotect">Смотреть видео</a>
-      </article>
-    </section> -->
-
     <div class="sep"></div>
 
-    <section id="video-2fa" class="card">
-      <h2>Видео: настройка 2FA</h2>
-      <div class="video">
-        <!-- 2FA видео -->
-        <iframe src="https://www.youtube.com/embed/oN3Kg8NL-Hw" title="2FA — видео-инструкция"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-      <p class="muted">Если видео не отображается, откройте напрямую:
-        <a href="https://youtu.be/oN3Kg8NL-Hw" target="_blank"
-          rel="noopener noreferrer">https://youtu.be/oN3Kg8NL-Hw</a>
-      </p>
-    </section>
+    <section class="videos">
+      <article id="video-2fa" class="card">
+        <h2>Видео: настройка 2FA</h2>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/oN3Kg8NL-Hw" title="2FA — видео-инструкция"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <p class="muted">Если видео не отображается, откройте напрямую:
+          <a href="https://youtu.be/oN3Kg8NL-Hw" target="_blank"
+            rel="noopener noreferrer">https://youtu.be/oN3Kg8NL-Hw</a>
+        </p>
+      </article>
 
-    <section id="video-tgprotect" class="card">
-      <h2>Видео: настройка TG Protect</h2>
-      <div class="video">
-        <!-- TG Protect видео -->
-        <iframe src="https://www.youtube.com/embed/PMLP_hVVNAs" title="TG Protect — видео-инструкция"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-      <p class="muted">Если видео не отображается, откройте напрямую:
-        <a href="https://youtu.be/PMLP_hVVNAs" target="_blank"
-          rel="noopener noreferrer">https://youtu.be/PMLP_hVVNAs</a>
-      </p>
+      <article id="video-tgprotect" class="card">
+        <h2>Видео: настройка TG Protect</h2>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/PMLP_hVVNAs" title="TG Protect — видео-инструкция"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <p class="muted">Если видео не отображается, откройте напрямую:
+          <a href="https://youtu.be/PMLP_hVVNAs" target="_blank"
+            rel="noopener noreferrer">https://youtu.be/PMLP_hVVNAs</a>
+        </p>
+      </article>
     </section>
 
     <footer>
-    <div class="links">
-      <a href="https://www.tiktok.com/@rpmroleplay" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://discord.gg/8xSP8vRmN6" target="_blank"><i class="fab fa-discord"></i></a>
-      <a href="https://discord.gg/nAafQrCbMt" target="_blank"><i class="fas fa-university"></i></a>
-      <a href="https://t.me/rpmroleplay" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="https://t.me/rpmsupport_bot" target="_blank"><i class="fas fa-headset"></i></a>
-    </div>
-  </footer>
+      <div class="links">
+        <a href="https://www.tiktok.com/@rpmroleplay" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://discord.gg/8xSP8vRmN6" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://discord.gg/nAafQrCbMt" target="_blank"><i class="fas fa-university"></i></a>
+        <a href="https://t.me/rpmroleplay" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/rpmsupport_bot" target="_blank"><i class="fas fa-headset"></i></a>
+      </div>
+    </footer>
   </main>
 </body>
 
 </html>
-
