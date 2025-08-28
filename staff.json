@@ -15,7 +15,9 @@
       {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Лансере-Блэквуд"},
       {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
       {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
-      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"}
+      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
+      {"role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс"},
+      {"role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон"}
     ]
   },
   {
@@ -31,4 +33,5 @@
     ]
   }
 ]
+
 
