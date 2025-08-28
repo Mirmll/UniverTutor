@@ -1,20 +1,32 @@
 [
   {
-    "range": "01.01.2025 - 01.02.2025",
+    "range": "11.08.2025 - 11.09.2025",
     "staff": [
-      {"role": "dean", "img": "img/dean1.png", "name": "Ченгар Старк"},
-      {"role": "zam", "img": "img/zam1.png", "name": "Заместитель 1"},
-      {"role": "zam", "img": "img/zam2.png", "name": "Заместитель 2"},
-      {"role": "teacher", "img": "img/teacher1.png", "name": "Преподаватель 1"},
-      {"role": "teacher", "img": "img/teacher2.png", "name": "Преподаватель 2"}
+      {"role": "dean", "img": "dean.jpg", "name": "??"},
+      {"role": "zam", "img": "zam1.jpg", "name": "??"},
+      {"role": "zam", "img": "zam2.jpg", "name": "??"},
+      {"role": "teacher", "img": "teacher1.jpg", "name": "Кейт Шэдоу"},
+      {"role": "teacher", "img": "teacher2.jpg", "name": "Кими Старк"},
+      {"role": "teacher", "img": "teacher3.jpg", "name": "Кирилл Агнес-Степ"},
+      {"role": "teacher", "img": "teacher4.jpg", "name": "Тинаида Добренко"},
+      {"role": "teacher", "img": "teacher5.jpg", "name": "Эвелина Алакрити"},
+      {"role": "teacher", "img": "teacher6.jpg", "name": "Алия Блейз"},
+      {"role": "teacher", "img": "teacher7.jpg", "name": "Агнесс Лансере-Блэквуд"},
+      {"role": "teacher", "img": "teacher8.jpg", "name": "Даниэль Кобблпот"},
+      {"role": "teacher", "img": "teacher9.jpg", "name": "Трафальгар Культапкин"},
+      {"role": "teacher", "img": "teacher10.jpg", "name": "Ирина Коркина-Коннелли"}
     ]
   },
   {
-    "range": "01.02.2025 - 02.03.2025",
+    "range": "11.09.2025 - 11.10.2025",
     "staff": [
-      {"role": "dean", "img": "img/dean2.png", "name": "Декан 2"},
-      {"role": "zam", "img": "img/zam3.png", "name": "Заместитель 3"},
-      {"role": "teacher", "img": "img/teacher3.png", "name": "Преподаватель 3"}
+      {"role": "dean", "img": "dean.jpg", "name": "??"},
+      {"role": "zam", "img": "zam1.jpg", "name": "??"},
+      {"role": "zam", "img": "zam2.jpg", "name": "??"},
+      {"role": "teacher", "img": "teacher1.jpg", "name": "??"},
+      {"role": "teacher", "img": "teacher2.jpg", "name": "??"},
+      {"role": "teacher", "img": "teacher3.jpg", "name": "??"},
+      {"role": "teacher", "img": "teacher4.jpg", "name": "??"}
     ]
   }
 ]
