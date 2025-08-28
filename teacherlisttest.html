@@ -90,8 +90,19 @@ h2 { margin-bottom:20px; }
 </style>
 </head>
 <body>
-
+<header>
+  <h1>Университет RPM</h1>
+  <nav>
+    <a href="index.html">2FA + TGprotect</a>
+    <a href="locker.html">Смена скинов(гардероб)</a>
+    <a href="sync.html">Синхронизация</a>
+    <a href="teacherlist.html">Сотрудники</a>
+  </nav>
+</header>
+  <main>
   <h2>Сотрудники</h2>
+      <div class="date-range" id="dateRange"></div>
+
   <div id="slidesContainer"></div>
 
   <div class="controls">
@@ -99,8 +110,11 @@ h2 { margin-bottom:20px; }
     <button onclick="nextSlide()">Вперед ➡</button>
   </div>
 
-  <div class="date-range" id="dateRange"></div>
+</main>
 
+  <footer>
+  <p>© 2025 Университет RPM</p>
+</footer>
   <script>
     let current = 0;
 
