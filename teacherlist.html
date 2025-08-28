@@ -195,9 +195,41 @@
     }
 
     @media (min-width: 600px) and (max-width: 991px) {
+      .row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
       .teacher {
-        width: 45%;
-        max-width: 220px;
+        width: 90px;
+        padding: 6px;
+      }
+
+      .teacher img {
+        height: 90px;
+      }
+
+      .name {
+        font-size: 12px;
+        padding: 4px;
+      }
+      body {
+        font-size: 15px;
+      }
+
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        margin-top: 12px;
+      }
+
+      nav a {
+        margin: 8px;
+        font-size: 15px;
       }
     }
 
