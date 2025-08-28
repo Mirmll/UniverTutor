@@ -117,42 +117,36 @@ h2 { margin-bottom:20px; }
 <script>
 let current = 0;
 
-async function loadStaff(){
-  const res = await fetch('staff.txt');
-  const text = await res.text();
-  const blocks = text.split('___').filter(Boolean);
+async function loadStaff() {
+  const res = await fetch('staff.json');
+  const data = await res.json();
   const container = document.getElementById('slidesContainer');
 
-  blocks.forEach(block=>{
-    const lines = block.trim().split('\n');
-    const range = lines[0].replace('<','').replace('>','').trim();
-    const staffLines = lines.slice(1);
-
+  data.forEach(period => {
     const slide = document.createElement('div');
     slide.classList.add('slide');
-    slide.dataset.range = range;
+    slide.dataset.range = period.range;
 
     const pyramid = document.createElement('div'); pyramid.classList.add('pyramid');
     const deanRow = document.createElement('div'); deanRow.classList.add('row');
     const zamRow = document.createElement('div'); zamRow.classList.add('row');
     const teacherRow = document.createElement('div'); teacherRow.classList.add('row');
 
-    staffLines.forEach(line=>{
-      const [role,img,name] = line.split('|').map(s=>s.trim());
+    period.staff.forEach(person => {
       const div = document.createElement('div'); div.classList.add('teacher');
-      if(role==='1') div.classList.add('dean');
-      if(role==='2') div.classList.add('zam');
+      if(person.role==='dean') div.classList.add('dean');
+      if(person.role==='zam') div.classList.add('zam');
 
-      const image = document.createElement('img'); image.src=img; image.alt=name;
-      image.onerror = ()=>image.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';
-      div.appendChild(image);
+      const img = document.createElement('img'); img.src = person.img; img.alt = person.name;
+      img.onerror = ()=>img.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';
+      div.appendChild(img);
 
-      const n = document.createElement('div'); n.classList.add('name');
-      n.innerHTML = name + (role==='1'?'<br>(Декан)':role==='2'?'<br>(Зам. декана)':'');
-      div.appendChild(n);
+      const nameDiv = document.createElement('div'); nameDiv.classList.add('name');
+      nameDiv.innerHTML = person.name + (person.role==='dean'?'<br>(Декан)': person.role==='zam'?'<br>(Зам. декана)':'');
+      div.appendChild(nameDiv);
 
-      if(role==='1') deanRow.appendChild(div);
-      else if(role==='2') zamRow.appendChild(div);
+      if(person.role==='dean') deanRow.appendChild(div);
+      else if(person.role==='zam') zamRow.appendChild(div);
       else teacherRow.appendChild(div);
     });
 
