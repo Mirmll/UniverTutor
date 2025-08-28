@@ -99,17 +99,49 @@
       border: 2px solid #2b2f45;
     }
 
-
-    .teacher img[onerror] {
-      background: #222;
-    }
-
     .name {
       margin-top: 10px;
       background: #141828;
       border-radius: 10px;
       padding: 6px;
       font-size: 14px;
+    }
+
+    /* Декан — красная рамка с анимацией */
+    .dean {
+      position: relative;
+      border: 4px solid transparent;
+      border-radius: 16px;
+      background:
+        linear-gradient(var(--card), var(--card)) padding-box,
+        conic-gradient(from 0deg, red, orange, red) border-box;
+      animation: spinBorder 6s linear infinite;
+    }
+
+    .dean img {
+      border: 3px solid red;
+    }
+
+    @keyframes spinBorder {
+      0% {
+        background:
+          linear-gradient(var(--card), var(--card)) padding-box,
+          conic-gradient(from 0deg, red, orange, red) border-box;
+      }
+      100% {
+        background:
+          linear-gradient(var(--card), var(--card)) padding-box,
+          conic-gradient(from 360deg, red, orange, red) border-box;
+      }
+    }
+
+    /* Замы — золотая рамка */
+    .zam {
+      border: 3px solid gold;
+    }
+
+    .zam img {
+      border: 3px solid gold;
     }
 
     footer {
@@ -134,23 +166,14 @@
 
     /* 📲 Планшеты */
     @media (min-width: 600px) and (max-width: 991px) {
-      .row {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
       .teacher {
         width: 45%;
         max-width: 220px;
       }
     }
 
-    /* 💻 Компьютеры */
+    /* 💻 ПК */
     @media (min-width: 992px) {
-      .row {
-        flex-wrap: wrap;
-      }
-
       .teacher {
         width: 160px;
       }
@@ -175,7 +198,7 @@
     <div class="pyramid">
       <!-- Декан -->
       <div class="row">
-        <div class="teacher">
+        <div class="teacher dean">
           <img src="dean.jpg" alt="Декан"
             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
           <div class="name">??<br>(Декан)</div>
@@ -184,12 +207,12 @@
 
       <!-- Заместители -->
       <div class="row">
-        <div class="teacher">
+        <div class="teacher zam">
           <img src="zam1.jpg" alt="Зам декана"
             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
           <div class="name">??<br>(Зам. декана)</div>
         </div>
-        <div class="teacher">
+        <div class="teacher zam">
           <img src="zam2.jpg" alt="Зам декана"
             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
           <div class="name">??<br>(Зам. декана)</div>
@@ -219,32 +242,32 @@
           <div class="name">Тинаида Добренко</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher5.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/AkAi_KyOui.png';">
           <div class="name">Эвелина Алакрити</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher6.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/askalinka_mf.png';">
           <div class="name">Алия Блейз</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher7.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/AnnetKariborro.png';">
           <div class="name">Агнесс Лансере-Блэквуд</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher8.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/Boond007.png';">
           <div class="name">Даниэль Кобблпот</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher9.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/new_stalker3.png';">
           <div class="name">Трафальгар Культапкин</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
+          <img src="teacher10.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='img/klybhuzka.png';">
           <div class="name">Ирина Коркина-Коннелли</div>
         </div>
@@ -256,5 +279,4 @@
     <p>© 2025 Университет RPM</p>
   </footer>
 </body>
-
 </html>
