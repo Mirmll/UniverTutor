@@ -55,7 +55,6 @@
       color: #ffcc66;
     }
 
-
     main {
       flex: 1;
       max-width: 1000px;
@@ -113,7 +112,6 @@
       font-size: 14px;
     }
 
-    /* Декан — красная рамка с анимацией */
     .dean {
       position: relative;
       border: 4px solid transparent;
@@ -134,6 +132,7 @@
           linear-gradient(var(--card), var(--card)) padding-box,
           conic-gradient(from 0deg, red, orange, red) border-box;
       }
+
       100% {
         background:
           linear-gradient(var(--card), var(--card)) padding-box,
@@ -141,7 +140,6 @@
       }
     }
 
-    /* Замы — золотая рамка */
     .zam {
       border: 3px solid gold;
     }
@@ -157,7 +155,6 @@
       text-align: center;
     }
 
-    /* 📱 Телефоны */
     @media (max-width: 599px) {
       .row {
         flex-direction: row;
@@ -178,9 +175,12 @@
         font-size: 12px;
         padding: 4px;
       }
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
-    /* 📲 Планшеты */
     @media (min-width: 600px) and (max-width: 991px) {
       .teacher {
         width: 45%;
@@ -188,7 +188,6 @@
       }
     }
 
-    /* 💻 ПК */
     @media (min-width: 992px) {
       .teacher {
         width: 160px;
@@ -238,53 +237,43 @@
       <!-- Преподаватели -->
       <div class="row">
         <div class="teacher">
-          <img src="teacher1.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/toxic_2k72.png';">
+          <img src="teacher1.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/toxic_2k72.png';">
           <div class="name">Кейт Шэдоу</div>
         </div>
         <div class="teacher">
-          <img src="teacher2.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/zxczapoy.png';">
+          <img src="teacher2.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/zxczapoy.png';">
           <div class="name">Кими Старк</div>
         </div>
         <div class="teacher">
-          <img src="teacher3.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/ranger113.png';">
+          <img src="teacher3.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/ranger113.png';">
           <div class="name">Кирилл Агнес-Степ</div>
         </div>
         <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/Tinaida.png';">
+          <img src="teacher4.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Tinaida.png';">
           <div class="name">Тинаида Добренко</div>
         </div>
         <div class="teacher">
-          <img src="teacher5.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/AkAi_KyOui.png';">
+          <img src="teacher5.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AkAi_KyOui.png';">
           <div class="name">Эвелина Алакрити</div>
         </div>
         <div class="teacher">
-          <img src="teacher6.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/askalinka_mf.png';">
+          <img src="teacher6.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/askalinka_mf.png';">
           <div class="name">Алия Блейз</div>
         </div>
         <div class="teacher">
-          <img src="teacher7.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/AnnetKariborro.png';">
+          <img src="teacher7.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AnnetKariborro.png';">
           <div class="name">Агнесс Лансере-Блэквуд</div>
         </div>
         <div class="teacher">
-          <img src="teacher8.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/Boond007.png';">
+          <img src="teacher8.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Boond007.png';">
           <div class="name">Даниэль Кобблпот</div>
         </div>
         <div class="teacher">
-          <img src="teacher9.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/new_stalker3.png';">
+          <img src="teacher9.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/new_stalker3.png';">
           <div class="name">Трафальгар Культапкин</div>
         </div>
         <div class="teacher">
-          <img src="teacher10.jpg" alt="Преподаватель"
-            onerror="this.onerror=null;this.src='img/klybhuzka.png';">
+          <img src="teacher10.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/klybhuzka.png';">
           <div class="name">Ирина Коркина-Коннелли</div>
         </div>
       </div>
@@ -295,4 +284,5 @@
     <p>© 2025 Университет RPM</p>
   </footer>
 </body>
+
 </html>
