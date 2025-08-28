@@ -2,31 +2,32 @@
   {
     "range": "11.08.2025 - 11.09.2025",
     "staff": [
-      {"role": "dean", "img": "dean.jpg", "name": "??"},
-      {"role": "zam", "img": "zam1.jpg", "name": "??"},
-      {"role": "zam", "img": "zam2.jpg", "name": "??"},
-      {"role": "teacher", "img": "teacher1.jpg", "name": "Кейт Шэдоу"},
-      {"role": "teacher", "img": "teacher2.jpg", "name": "Кими Старк"},
-      {"role": "teacher", "img": "teacher3.jpg", "name": "Кирилл Агнес-Степ"},
-      {"role": "teacher", "img": "teacher4.jpg", "name": "Тинаида Добренко"},
-      {"role": "teacher", "img": "teacher5.jpg", "name": "Эвелина Алакрити"},
-      {"role": "teacher", "img": "teacher6.jpg", "name": "Алия Блейз"},
-      {"role": "teacher", "img": "teacher7.jpg", "name": "Агнесс Лансере-Блэквуд"},
-      {"role": "teacher", "img": "teacher8.jpg", "name": "Даниэль Кобблпот"},
-      {"role": "teacher", "img": "teacher9.jpg", "name": "Трафальгар Культапкин"},
-      {"role": "teacher", "img": "teacher10.jpg", "name": "Ирина Коркина-Коннелли"}
+      {"role": "dean", "img": "img/dean.png", "name": "??"},
+      {"role": "zam", "img": "img/zam1.png", "name": "??"},
+      {"role": "zam", "img": "img/zam2.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher1.png", "name": "Кейт Шэдоу"},
+      {"role": "teacher", "img": "img/teacher2.png", "name": "Кими Старк"},
+      {"role": "teacher", "img": "img/teacher3.png", "name": "Кирилл Агнес-Степ"},
+      {"role": "teacher", "img": "img/teacher4.png", "name": "Тинаида Добренко"},
+      {"role": "teacher", "img": "img/teacher5.png", "name": "Эвелина Алакрити"},
+      {"role": "teacher", "img": "img/teacher6.png", "name": "Алия Блейз"},
+      {"role": "teacher", "img": "img/teacher7.png", "name": "Агнесс Лансере-Блэквуд"},
+      {"role": "teacher", "img": "img/teacher8.png", "name": "Даниэль Кобблпот"},
+      {"role": "teacher", "img": "img/teacher9.png", "name": "Трафальгар Культапкин"},
+      {"role": "teacher", "img": "img/teacher10.png", "name": "Ирина Коркина-Коннелли"}
     ]
   },
   {
     "range": "11.09.2025 - 11.10.2025",
     "staff": [
-      {"role": "dean", "img": "dean.jpg", "name": "??"},
-      {"role": "zam", "img": "zam1.jpg", "name": "??"},
-      {"role": "zam", "img": "zam2.jpg", "name": "??"},
-      {"role": "teacher", "img": "teacher1.jpg", "name": "??"},
-      {"role": "teacher", "img": "teacher2.jpg", "name": "??"},
-      {"role": "teacher", "img": "teacher3.jpg", "name": "??"},
-      {"role": "teacher", "img": "teacher4.jpg", "name": "??"}
+      {"role": "dean", "img": "img/dean.png", "name": "??"},
+      {"role": "zam", "img": "img/zam1.png", "name": "??"},
+      {"role": "zam", "img": "img/zam2.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher1.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher2.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher3.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher4.png", "name": "??"}
     ]
   }
 ]
+
