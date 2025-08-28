@@ -1,0 +1,20 @@
+[
+  {
+    "range": "01.01.2025 - 01.02.2025",
+    "staff": [
+      {"role": "dean", "img": "img/dean1.png", "name": "Ченгар Старк"},
+      {"role": "zam", "img": "img/zam1.png", "name": "Заместитель 1"},
+      {"role": "zam", "img": "img/zam2.png", "name": "Заместитель 2"},
+      {"role": "teacher", "img": "img/teacher1.png", "name": "Преподаватель 1"},
+      {"role": "teacher", "img": "img/teacher2.png", "name": "Преподаватель 2"}
+    ]
+  },
+  {
+    "range": "01.02.2025 - 02.03.2025",
+    "staff": [
+      {"role": "dean", "img": "img/dean2.png", "name": "Декан 2"},
+      {"role": "zam", "img": "img/zam3.png", "name": "Заместитель 3"},
+      {"role": "teacher", "img": "img/teacher3.png", "name": "Преподаватель 3"}
+    ]
+  }
+]
