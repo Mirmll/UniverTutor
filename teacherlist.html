@@ -154,13 +154,23 @@
     /* 📱 Телефоны */
     @media (max-width: 599px) {
       .row {
-        flex-direction: column;
-        gap: 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       .teacher {
-        width: 80%;
-        max-width: 280px;
+        width: 90px;
+        padding: 6px;
+      }
+
+      .teacher img {
+        height: 90px;
+      }
+
+      .name {
+        font-size: 12px;
+        padding: 4px;
       }
     }
 
