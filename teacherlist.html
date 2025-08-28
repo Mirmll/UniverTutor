@@ -83,6 +83,11 @@
       padding: 12px;
       width: 160px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+      transition: transform 0.3s;
+    }
+
+    .teacher:hover {
+      transform: scale(1.05);
     }
 
     .teacher img {
@@ -91,6 +96,10 @@
       object-fit: cover;
       border-radius: 12px;
       border: 2px solid #2b2f45;
+    }
+
+    .teacher img[onerror] {
+      background: #222;
     }
 
     .name {
@@ -106,6 +115,43 @@
       border-top: 1px solid #23273a;
       padding: 20px;
       text-align: center;
+    }
+
+    /* 📱 Телефоны */
+    @media (max-width: 599px) {
+      .row {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .teacher {
+        width: 80%;
+        max-width: 280px;
+      }
+    }
+
+    /* 📲 Планшеты */
+    @media (min-width: 600px) and (max-width: 991px) {
+      .row {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .teacher {
+        width: 45%;
+        max-width: 220px;
+      }
+    }
+
+    /* 💻 Компьютеры */
+    @media (min-width: 992px) {
+      .row {
+        flex-wrap: wrap;
+      }
+
+      .teacher {
+        width: 160px;
+      }
     }
   </style>
 </head>
@@ -129,8 +175,8 @@
       <div class="row">
         <div class="teacher">
           <img src="dean.jpg" alt="Декан"
-            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg'">
-          <div class="name">???<br>(Декан)</div>
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">??<br>(Декан)</div>
         </div>
       </div>
 
@@ -163,12 +209,12 @@
         <div class="teacher">
           <img src="teacher3.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-          <div class="name">?</div>
+          <div class="name">??</div>
         </div>
         <div class="teacher">
           <img src="teacher4.jpg" alt="Преподаватель"
             onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-          <div class="name">?</div>
+          <div class="name">??</div>
         </div>
       </div>
     </div>
