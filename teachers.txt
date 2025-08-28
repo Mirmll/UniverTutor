@@ -1,12 +1,12 @@
 ___<01.01.2025-02.02.2025>___
-декан|img/dean.jpg
-зам.декана|img/zam1.jpg
-зам.декана|img/zam2.jpg
-препод|img/teacher1.jpg
-препод|img/teacher2.jpg
+декан|img/dean.jpg|Иван Иванов
+зам.декана|img/zam1.jpg|Пётр Петров
+зам.декана|img/zam2.jpg|Светлана Смирнова
+препод|img/teacher1.jpg|Кейт Шэдоу
+препод|img/teacher2.jpg|Кими Старк
 
 ___<03.02.2025-03.03.2025>___
-декан|img/dean2.jpg
-зам.декана|img/zam3.jpg
-препод|img/teacher3.jpg
-препод|img/teacher4.jpg
+декан|img/dean2.jpg|Алексей Кузнецов
+зам.декана|img/zam3.jpg|Мария Ланская
+препод|img/teacher3.jpg|Даниэль Кобблпот
+препод|img/teacher4.jpg|Тинаида Добренко
