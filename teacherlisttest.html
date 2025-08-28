@@ -390,15 +390,30 @@
       window.slides = slides;
     }
 
-    function createTeacher(name, img, extraClass = '') {
-      const div = document.createElement('div');
-      div.className = 'teacher ' + extraClass;
-      div.innerHTML = `
-        <img src="${img}" alt="${name}" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-        <div class="name">??<br>(${name})</div>
-      `;
-      return div;
-    }
+    lines.forEach(l => {
+  const parts = l.split('|'); // [роль, img, имя]
+  const role = parts[0];
+  const img = parts[1];
+  const name = parts[2] || '??'; // если имя не указано, ставим ??
+
+  let extraClass = '';
+  if(role === 'декан') extraClass = 'dean';
+  if(role === 'зам.декана') extraClass = 'zam';
+
+  const t = createTeacher(name, img, extraClass, role);
+  row.appendChild(t);
+});
+
+function createTeacher(name, img, extraClass='', roleDisplay='Преподаватель') {
+  const div = document.createElement('div');
+  div.className = 'teacher ' + extraClass;
+  div.innerHTML = `
+    <img src="${img}" alt="${name}" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+    <div class="name">${name}<br>(${roleDisplay})</div>
+  `;
+  return div;
+}
+
 
     let current = 0;
     function showSlide(i) {
