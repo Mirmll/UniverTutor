@@ -1,33 +1,34 @@
 [
   {
-    "range": "11.08.2025 - 11.09.2025",
+    "range": "11.08.2025 – 11.09.2025",
     "staff": [
       {"role": "dean", "img": "img/dean.png", "name": "??"},
       {"role": "zam", "img": "img/zam1.png", "name": "??"},
       {"role": "zam", "img": "img/zam2.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher1.png", "name": "Кейт Шэдоу"},
-      {"role": "teacher", "img": "img/teacher2.png", "name": "Кими Старк"},
-      {"role": "teacher", "img": "img/teacher3.png", "name": "Кирилл Агнес-Степ"},
-      {"role": "teacher", "img": "img/teacher4.png", "name": "Тинаида Добренко"},
-      {"role": "teacher", "img": "img/teacher5.png", "name": "Эвелина Алакрити"},
-      {"role": "teacher", "img": "img/teacher6.png", "name": "Алия Блейз"},
-      {"role": "teacher", "img": "img/teacher7.png", "name": "Агнесс Лансере-Блэквуд"},
-      {"role": "teacher", "img": "img/teacher8.png", "name": "Даниэль Кобблпот"},
-      {"role": "teacher", "img": "img/teacher9.png", "name": "Трафальгар Культапкин"},
-      {"role": "teacher", "img": "img/teacher10.png", "name": "Ирина Коркина-Коннелли"}
+
+      {"role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу"},
+      {"role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк"},
+      {"role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ"},
+      {"role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко"},
+      {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
+      {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
+      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Лансере-Блэквуд"},
+      {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
+      {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
+      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"}
     ]
   },
   {
-    "range": "11.09.2025 - 11.10.2025",
+    "range": "11.09.2025 – 11.10.2025",
     "staff": [
       {"role": "dean", "img": "img/dean.png", "name": "??"},
       {"role": "zam", "img": "img/zam1.png", "name": "??"},
       {"role": "zam", "img": "img/zam2.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher1.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher2.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher3.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher4.png", "name": "??"}
+
+      {"role": "teacher", "img": "img/teacher-a.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-b.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-c.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-d.png", "name": "??"}
     ]
   }
 ]
-
