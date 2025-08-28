@@ -175,6 +175,7 @@
         font-size: 12px;
         padding: 4px;
       }
+
       body {
         font-size: 15px;
       }
@@ -214,6 +215,7 @@
         font-size: 12px;
         padding: 4px;
       }
+
       body {
         font-size: 15px;
       }
@@ -238,6 +240,62 @@
         width: 160px;
       }
     }
+
+    .slide {
+      display: none;
+      animation: fade 0.5s;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .date-range {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .controls button {
+      background: linear-gradient(135deg, #5b9cff, #3a7add);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(91, 156, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .controls button:hover {
+      background: linear-gradient(135deg, #6baeff, #4a8dff);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(91, 156, 255, 0.6);
+    }
+
+    .controls button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(91, 156, 255, 0.4);
+    }
   </style>
 </head>
 
@@ -254,80 +312,160 @@
 
   <main>
     <h2>Список сотрудников</h2>
+    <div class="date-range" id="dateRange">01.09.2025 – 30.09.2025</div>
 
-    <div class="pyramid">
+    <div class="slide active" data-range="11.08.2025 – 11.09.2025">
       <!-- Декан -->
-      <div class="row">
-        <div class="teacher dean">
-          <img src="dean.jpg" alt="Декан"
-            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-          <div class="name">??<br>(Декан)</div>
+      <div class="pyramid">
+        <div class="row">
+          <div class="teacher dean">
+            <img src="dean.jpg" alt="Декан"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Декан)</div>
+          </div>
         </div>
-      </div>
 
-      <!-- Заместители -->
-      <div class="row">
-        <div class="teacher zam">
-          <img src="zam1.jpg" alt="Зам декана"
-            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-          <div class="name">??<br>(Зам. декана)</div>
+        <!-- Заместители -->
+        <div class="row">
+          <div class="teacher zam">
+            <img src="zam1.jpg" alt="Зам декана"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Зам. декана)</div>
+          </div>
+          <div class="teacher zam">
+            <img src="zam2.jpg" alt="Зам декана"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Зам. декана)</div>
+          </div>
         </div>
-        <div class="teacher zam">
-          <img src="zam2.jpg" alt="Зам декана"
-            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
-          <div class="name">??<br>(Зам. декана)</div>
-        </div>
-      </div>
 
-      <!-- Преподаватели -->
-      <div class="row">
-        <div class="teacher">
-          <img src="teacher1.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/toxic_2k72.png';">
-          <div class="name">Кейт Шэдоу</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher2.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/zxczapoy.png';">
-          <div class="name">Кими Старк</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher3.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/ranger113.png';">
-          <div class="name">Кирилл Агнес-Степ</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher4.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Tinaida.png';">
-          <div class="name">Тинаида Добренко</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher5.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AkAi_KyOui.png';">
-          <div class="name">Эвелина Алакрити</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher6.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/askalinka_mf.png';">
-          <div class="name">Алия Блейз</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher7.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AnnetKariborro.png';">
-          <div class="name">Агнесс Лансере-Блэквуд</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher8.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Boond007.png';">
-          <div class="name">Даниэль Кобблпот</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher9.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/new_stalker3.png';">
-          <div class="name">Трафальгар Культапкин</div>
-        </div>
-        <div class="teacher">
-          <img src="teacher10.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/klybhuzka.png';">
-          <div class="name">Ирина Коркина-Коннелли</div>
+        <!-- Преподаватели -->
+        <div class="row">
+          <div class="teacher">
+            <img src="teacher1.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/toxic_2k72.png';">
+            <div class="name">Кейт Шэдоу</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher2.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/zxczapoy.png';">
+            <div class="name">Кими Старк</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher3.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/ranger113.png';">
+            <div class="name">Кирилл Агнес-Степ</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher4.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Tinaida.png';">
+            <div class="name">Тинаида Добренко</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher5.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AkAi_KyOui.png';">
+            <div class="name">Эвелина Алакрити</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher6.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/askalinka_mf.png';">
+            <div class="name">Алия Блейз</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher7.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/AnnetKariborro.png';">
+            <div class="name">Агнесс Лансере-Блэквуд</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher8.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/Boond007.png';">
+            <div class="name">Даниэль Кобблпот</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher9.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/new_stalker3.png';">
+            <div class="name">Трафальгар Культапкин</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher10.jpg" alt="Преподаватель" onerror="this.onerror=null;this.src='img/klybhuzka.png';">
+            <div class="name">Ирина Коркина-Коннелли</div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="slide" data-range="11.09.2025 – 11.10.2025">
+      <!-- Декан -->
+      <div class="pyramid">
+        <div class="row">
+          <div class="teacher dean">
+            <img src="dean.jpg" alt="Декан"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Декан)</div>
+          </div>
+        </div>
+
+        <!-- Заместители -->
+        <div class="row">
+          <div class="teacher zam">
+            <img src="zam1.jpg" alt="Зам декана"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Зам. декана)</div>
+          </div>
+          <div class="teacher zam">
+            <img src="zam2.jpg" alt="Зам декана"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??<br>(Зам. декана)</div>
+          </div>
+        </div>
+
+        <!-- Преподаватели -->
+        <div class="row">
+          <div class="teacher">
+            <img src="teacher1.jpg" alt="Преподаватель"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher2.jpg" alt="Преподаватель"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher3.jpg" alt="Преподаватель"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??</div>
+          </div>
+          <div class="teacher">
+            <img src="teacher4.jpg" alt="Преподаватель"
+              onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+            <div class="name">??</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="prevSlide()">⬅ Назад</button>
+      <button onclick="nextSlide()">Вперед ➡</button>
+    </div>
+
   </main>
 
   <footer>
     <p>© 2025 Университет RPM</p>
   </footer>
-</body>
 
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dateRange = document.getElementById('dateRange');
+
+    function showSlide(i) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+      dateRange.textContent = slides[i].dataset.range;
+    }
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+    function prevSlide() {
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    }
+  </script>
+
+</body>
 </html>
