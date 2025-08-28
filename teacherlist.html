@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список сотрудников</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171924;
+      --text: #e7e9ee;
+      --muted: #a7adbb;
+      --accent: #5b9cff;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #171924;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    nav a {
+      color: #f1f1f1;
+      text-decoration: none;
+      margin: 6px 12px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffcc66;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .teacher {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 12px;
+      width: 160px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+    }
+
+    .teacher img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #2b2f45;
+    }
+
+    .name {
+      margin-top: 10px;
+      background: #141828;
+      border-radius: 10px;
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #141828;
+      border-top: 1px solid #23273a;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Университет RPM</h1>
+    <nav>
+      <a href="index.html">2FA + TGprotect</a>
+      <a href="locker.html">Раздевалки</a>
+      <a href="sync.html">Синхронизация</a>
+      <a href="teacherlist.html">Сотрудники</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Список сотрудников</h2>
+
+    <div class="pyramid">
+      <!-- Декан -->
+      <div class="row">
+        <div class="teacher">
+          <img src="dean.jpg" alt="Декан"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg'">
+          <div class="name">Иванов Иван Иванович<br>(Декан)</div>
+        </div>
+      </div>
+
+      <!-- Заместители -->
+      <div class="row">
+        <div class="teacher">
+          <img src="zam1.jpg" alt="Зам декана"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">Петров Пётр Петрович<br>(Зам. декана)</div>
+        </div>
+        <div class="teacher">
+          <img src="zam2.jpg" alt="Зам декана"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">Сидоров Сидор Сидорович<br>(Зам. декана)</div>
+        </div>
+      </div>
+
+      <!-- Преподаватели -->
+      <div class="row">
+        <div class="teacher">
+          <img src="teacher1.jpg" alt="Преподаватель"
+            onerror="this.onerror=null;this.src='img/toxic_2k72.png';">
+          <div class="name">Александров А.А.</div>
+        </div>
+        <div class="teacher">
+          <img src="teacher2.jpg" alt="Преподаватель"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">Маркова М.М.</div>
+        </div>
+        <div class="teacher">
+          <img src="teacher3.jpg" alt="Преподаватель"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">Фёдоров Ф.Ф.</div>
+        </div>
+        <div class="teacher">
+          <img src="teacher4.jpg" alt="Преподаватель"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';">
+          <div class="name">Васильева В.В.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Университет RPM</p>
+  </footer>
+</body>
+
+</html>
