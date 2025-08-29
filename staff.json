@@ -13,7 +13,7 @@
       {"role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко"},
       {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
       {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
-      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Лансере-Блэквуд"},
+      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе"},
       {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
       {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
       {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
@@ -36,6 +36,7 @@
     ]
   }
 ]
+
 
 
 
