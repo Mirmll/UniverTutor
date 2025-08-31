@@ -327,15 +327,17 @@
       }));
 
       // связи: все от декана
-      let links = [];
-      const dean = people.find(p => p.role === "dean");
-      const zams = people.filter(p => p.role === "zam");
-      const teachers = people.filter(p => p.role === "teacher");
+      const deans = people.filter(p => p.role === "dean");
+const zams = people.filter(p => p.role === "zam");
+const teachers = people.filter(p => p.role === "teacher");
 
-      if (dean) {
-        zams.forEach(z => links.push({ source: dean.id, target: z.id, type: "zam" }));
-        teachers.forEach(t => links.push({ source: dean.id, target: t.id, type: "teacher" }));
-      }
+let links = [];
+
+deans.forEach(dean => {
+  zams.forEach(z => links.push({ source: dean.id, target: z.id, type: "zam" }));
+  teachers.forEach(t => links.push({ source: dean.id, target: t.id, type: "teacher" }));
+});
+
 
       const width = window.innerWidth;
       const height = window.innerHeight;
