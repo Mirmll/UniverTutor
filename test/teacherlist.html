@@ -2,442 +2,200 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Университет RPM West</title>
-  <link rel="icon" href="img/UniLogo.png" type="image/png">
+  <title>Teacher Graph</title>
   <style>
-    :root {
-      --bg: #0f1115;
-      --card: #171924;
-      --text: #e7e9ee;
-      --muted: #a7adbb;
-      --accent: #5b9cff;
-    }
-
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background: #0b1a2e;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
     }
-
-    header {
-      background: #171924;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
-      flex-wrap: wrap;
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 8px;
     }
-
-    header h1 { margin: 0; font-size: 20px; }
-
-    nav { margin-top: 10px; }
-    nav a {
-      color: #f1f1f1;
-      text-decoration: none;
-      margin: 6px 12px;
-      font-weight: bold;
-      display: inline-block;
-    }
-    nav a:hover { color: #ffcc66; }
-
-    main {
-      flex: 1;
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    .pyramid { display: flex; flex-direction: column; align-items: center; gap: 40px; }
-    .row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-
-    .teacher {
-      background: var(--card);
-      border: 2px solid var(--accent);
-      border-radius: 16px;
-      padding: 12px;
-      width: 160px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
-      transition: transform 0.3s;
-    }
-    .teacher:hover { transform: scale(1.05); }
-
-    .teacher img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      object-position: top;
-      border-radius: 12px;
-      border: 2px solid #2b2f45;
-    }
-
-    .name {
-      margin-top: 10px;
-      background: #141828;
-      border-radius: 10px;
-      padding: 6px;
+    select {
+      padding: 5px;
       font-size: 14px;
     }
-
-    .slide { display: none; animation: fade 0.5s; }
-    .slide.active { display: block; }
-    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-
-    .date-range { margin-bottom: 20px; font-size: 16px; color: var(--muted); }
-
-    .controls { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
-    .controls button {
-      background: linear-gradient(135deg, #5b9cff, #3a7add);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(91, 156, 255, .4);
-      transition: all .3s ease;
+    canvas {
+      display: block;
     }
-    .controls button:hover {
-      background: linear-gradient(135deg, #6baeff, #4a8dff);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(91, 156, 255, .6);
-    }
-
-    footer { background: #141828; border-top: 1px solid #23273a; padding: 20px; text-align: center; }
-
-    /* панель справа */
-    #info-panel {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: rgba(10,10,20,0.9);
-      color: white;
-      padding: 20px;
-      transition: right 0.3s;
-      overflow-y: auto;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
-      z-index: 9998;
-    }
-    #info-panel.active { right: 0; }
-    #info-panel img { width: 100%; border-radius: 12px; margin: 10px 0; }
-
-    /* секретная кнопка */
-    #secret-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      cursor: pointer;
-      z-index: 9999;
-    }
-
-    /* фон со звёздами */
-    body.alt-mode { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); overflow: hidden; }
-    canvas#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-    /* скрытие интерфейса */
-    body.alt-mode header,
-    body.alt-mode main,
-    body.alt-mode footer { display: none !important; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Университет RPM</h1>
-    <nav>
-      <a href="index.html">2FA + TGprotect</a>
-      <a href="locker.html">Смена скинов(гардероб)</a>
-      <a href="sync.html">Синхронизация</a>
-      <a href="teacherlist.html">Сотрудники</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Сотрудники</h2>
-    <div class="date-range" id="dateRange"></div>
-    <div id="slidesContainer"></div>
-
-    <div class="controls">
-      <button onclick="prevSlide()">⬅ Назад</button>
-      <button onclick="nextSlide()">Вперед ➡</button>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 Университет RPM</p>
-  </footer>
-
-  <!-- секретная кнопка -->
-  <div id="secret-btn"></div>
-
-  <div id="info-panel">
-    <h2 id="info-name"></h2>
-    <img id="info-img" src="" alt="">
-    <p id="info-role"></p>
+  <div id="controls">
+    <label>Выбери период:</label>
+    <select id="rangeSelect"></select>
   </div>
+  <canvas id="canvas"></canvas>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
-    let current = 0;
-    let altMode = false;
+    // ========== ТВОЙ JSON ==========
 
-    async function loadStaff() {
-      const res = await fetch('staff.json');
-      const data = await res.json();
-      const container = document.getElementById('slidesContainer');
+    const data = [
+      {
+        "range": "11.08.2025 – 11.09.2025",
+        "staff": [
+          { "id": "dean1", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "zam1", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "zam2", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "teach1", "role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу" },
+          { "id": "teach2", "role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк" },
+          { "id": "teach3", "role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ" },
+          { "id": "teach4", "role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко" },
+          { "id": "teach5", "role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити" },
+          { "id": "teach6", "role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз" },
+          { "id": "teach7", "role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе" },
+          { "id": "teach8", "role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот" },
+          { "id": "teach9", "role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин" },
+          { "id": "teach10", "role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли" },
+          { "id": "teach11", "role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс" },
+          { "id": "teach12", "role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон" },
+          { "id": "teach13", "role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт" }
+        ],
+        "links": [
+          { "source": "dean1", "target": "zam1" },
+          { "source": "dean1", "target": "zam2" },
+          { "source": "dean1", "target": "teach1" },
+          { "source": "dean1", "target": "teach2" },
+          { "source": "dean1", "target": "teach3" },
+          { "source": "dean1", "target": "teach4" },
+          { "source": "dean1", "target": "teach5" },
+          { "source": "dean1", "target": "teach6" },
+          { "source": "dean1", "target": "teach7" },
+          { "source": "dean1", "target": "teach8" },
+          { "source": "dean1", "target": "teach9" },
+          { "source": "dean1", "target": "teach10" },
+          { "source": "dean1", "target": "teach11" },
+          { "source": "dean1", "target": "teach12" },
+          { "source": "dean1", "target": "teach13" }
+        ]
+      },
+      {
+        "range": "11.09.2025 – 11.10.2025",
+        "staff": [
+          { "id": "dean2", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "zam3", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "zam4", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "teach14", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "teach15", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+          { "id": "teach16", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" }
+        ],
+        "links": [
+          { "source": "dean2", "target": "zam3" },
+          { "source": "dean2", "target": "zam4" },
+          { "source": "dean2", "target": "teach14" },
+          { "source": "dean2", "target": "teach15" },
+          { "source": "dean2", "target": "teach16" }
+        ]
+      }
+    ];
 
-      data.forEach(period => {
-        const slide = document.createElement('div');
-        slide.classList.add('slide');
-        slide.dataset.range = period.range;
+    // ========== CANVAS РЕНДЕР ==========
 
-        const pyramid = document.createElement('div');
-        pyramid.classList.add('pyramid');
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-        const deanRow = document.createElement('div'); deanRow.classList.add('row');
-        const zamRow = document.createElement('div'); zamRow.classList.add('row');
-        const teacherRow = document.createElement('div'); teacherRow.classList.add('row');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-        period.staff.forEach(person => {
-          const div = document.createElement('div'); div.classList.add('teacher');
-          if (person.role === 'dean') div.classList.add('dean');
-          if (person.role === 'zam') div.classList.add('zam');
+    // загружаем изображения
+    const imgCache = {};
+    function loadImage(src) {
+      if (imgCache[src]) return imgCache[src];
+      const img = new Image();
+      img.src = src;
+      imgCache[src] = img;
+      return img;
+    }
 
-          const img = document.createElement('img'); img.src = person.img; img.alt = person.name;
-          img.onerror = () => img.src = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';
-          div.appendChild(img);
+    // отрисовка графа
+    function drawGraph(period) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          const nameDiv = document.createElement('div'); nameDiv.classList.add('name');
-          nameDiv.innerHTML = person.name + (person.role === 'dean' ? '<br>(Декан)' : person.role === 'zam' ? '<br>(Зам. декана)' : '');
-          div.appendChild(nameDiv);
+      const staff = period.staff;
+      const links = period.links;
 
-          if (person.role === 'dean') deanRow.appendChild(div);
-          else if (person.role === 'zam') zamRow.appendChild(div);
-          else teacherRow.appendChild(div);
-        });
+      // находим декана (центр)
+      const dean = staff.find(s => s.role === "dean");
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
 
-        pyramid.appendChild(deanRow);
-        if (zamRow.children.length) pyramid.appendChild(zamRow);
-        if (teacherRow.children.length) pyramid.appendChild(teacherRow);
+      // позиции
+      const positions = {};
+      positions[dean.id] = { x: centerX, y: centerY };
 
-        slide.appendChild(pyramid);
-        container.appendChild(slide);
+      // круг для остальных
+      const radius = 300;
+      const others = staff.filter(s => s.id !== dean.id);
+      others.forEach((s, i) => {
+        const angle = (i / others.length) * Math.PI * 2;
+        positions[s.id] = {
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius
+        };
       });
 
-      showSlide(0);
+      // рисуем связи
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 2;
+      links.forEach(link => {
+        const a = positions[link.source];
+        const b = positions[link.target];
+        if (!a || !b) return;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      });
+
+      // рисуем узлы
+      staff.forEach(s => {
+        const pos = positions[s.id];
+        const img = loadImage(s.img);
+        const size = 60;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, size/2, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(img, pos.x - size/2, pos.y - size/2, size, size);
+        ctx.restore();
+
+        // подпись
+        ctx.fillStyle = "white";
+        ctx.font = "14px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(s.name, pos.x, pos.y + size/2 + 15);
+      });
     }
 
-    function showSlide(i) {
-      const slides = document.querySelectorAll('.slide');
-      slides.forEach(s => s.classList.remove('active'));
-      slides[i].classList.add('active');
-      document.getElementById('dateRange').textContent = slides[i].dataset.range;
-    }
+    // ========== КОНТРОЛЫ ==========
 
-    function nextSlide() {
-      const slides = document.querySelectorAll('.slide');
-      current = (current + 1) % slides.length;
-      showSlide(current);
-    }
-
-    function prevSlide() {
-      const slides = document.querySelectorAll('.slide');
-      current = (current - 1 + slides.length) % slides.length;
-      showSlide(current);
-    }
-
-    document.getElementById("secret-btn").addEventListener("click", () => {
-      altMode = !altMode;
-      if (altMode) {
-        document.body.classList.add("alt-mode");
-        launchTreeMode();
-      } else {
-        document.body.classList.remove("alt-mode");
-        launchNormalMode();
-      }
+    const rangeSelect = document.getElementById("rangeSelect");
+    data.forEach((period, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = period.range;
+      rangeSelect.appendChild(opt);
     });
 
-    function launchNormalMode() {
-      document.querySelector("svg")?.remove();
-      document.getElementById("info-panel").classList.remove("active");
-      document.getElementById("starfield")?.remove();
-    }
+    rangeSelect.addEventListener("change", () => {
+      drawGraph(data[rangeSelect.value]);
+    });
 
-    async function launchTreeMode() {
-      document.querySelector("svg")?.remove();
-      document.getElementById("starfield")?.remove();
-
-      // фон со звёздами
-      const starCanvas = document.createElement("canvas");
-      starCanvas.id = "starfield";
-      document.body.appendChild(starCanvas);
-
-      const ctx = starCanvas.getContext("2d");
-      let stars = [];
-      function resizeStars() {
-        starCanvas.width = window.innerWidth;
-        starCanvas.height = window.innerHeight;
-        stars = Array.from({length: 200}, () => ({
-          x: Math.random()*starCanvas.width,
-          y: Math.random()*starCanvas.height,
-          r: Math.random()*2,
-          dx: (Math.random()-0.5)*0.5,
-          dy: (Math.random()-0.5)*0.5
-        }));
-      }
-      resizeStars();
-      window.addEventListener("resize", resizeStars);
-
-      function animateStars() {
-        ctx.clearRect(0,0,starCanvas.width,starCanvas.height);
-        ctx.fillStyle = "white";
-        stars.forEach(s => {
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-          ctx.fill();
-          s.x += s.dx; s.y += s.dy;
-          if(s.x<0||s.x>starCanvas.width) s.dx*=-1;
-          if(s.y<0||s.y>starCanvas.height) s.dy*=-1;
-        });
-        requestAnimationFrame(animateStars);
-      }
-      animateStars();
-
-      // данные
-      const res = await fetch("staff.json");
-      const data = await res.json();
-      const staff = data[current].staff;
-
-      const people = staff.map(p => ({
-        id: p.name,
-        name: p.name,
-        img: p.img,
-        role: p.role
-      }));
-
-      // связи: все от декана
-      const deans = people.filter(p => p.role === "dean");
-const zams = people.filter(p => p.role === "zam");
-const teachers = people.filter(p => p.role === "teacher");
-
-let links = [];
-
-deans.forEach(dean => {
-  zams.forEach(z => links.push({ source: dean.id, target: z.id, type: "zam" }));
-  teachers.forEach(t => links.push({ source: dean.id, target: t.id, type: "teacher" }));
-});
-
-
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      const svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-      // контейнер для зума/панорамирования
-      const container = svg.append("g");
-
-      // Zoom + перемещение всей сцены мышкой
-      svg.call(
-        d3.zoom().scaleExtent([0.5, 2]).on("zoom", (event) => {
-          container.attr("transform", event.transform);
-        })
-      );
-
-      const simulation = d3.forceSimulation(people)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(250))
-        .force("charge", d3.forceManyBody().strength(-900))
-        .force("center", d3.forceCenter(width / 2, height / 2));
-
-      // линии
-      const link = container.append("g")
-        .selectAll("line")
-        .data(links)
-        .join("line")
-        .attr("stroke", d => d.type === "zam" ? "gold" : "white")
-        .attr("stroke-width", () => Math.random() * 4 + 1) // случайная толщина 1–5px
-        .attr("opacity", 0.8);
-
-      // узлы
-      const node = container.append("g")
-        .selectAll("g")
-        .data(people)
-        .join("g")
-        .attr("class", "node")
-        .call(d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended));
-
-      node.append("circle")
-        .attr("r", 45)
-        .attr("fill", d => d.role==="dean" ? "crimson" : d.role==="zam" ? "gold" : "dodgerblue")
-        .attr("stroke","#fff")
-        .attr("stroke-width",3)
-        .style("filter","drop-shadow(0 0 10px rgba(255,255,255,0.7))")
-        .on("click", showInfo);
-
-      node.append("image")
-        .attr("xlink:href", d => d.img)
-        .attr("x", -35)
-        .attr("y", -35)
-        .attr("width", 70)
-        .attr("height", 70)
-        .attr("clip-path", "circle(35px at 35px 35px)");
-
-      node.append("text")
-        .attr("dy", 65)
-        .attr("text-anchor", "middle")
-        .attr("fill", "#fff")
-        .text(d => d.name);
-
-      simulation.on("tick", () => {
-        link
-          .attr("x1", d => d.source.x)
-          .attr("y1", d => d.source.y)
-          .attr("x2", d => d.target.x)
-          .attr("y2", d => d.target.y);
-
-        node.attr("transform", d => `translate(${d.x},${d.y})`);
-      });
-
-      function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-      }
-      function dragged(event, d) {
-        d.fx = event.x;
-        d.fy = event.y;
-      }
-      function dragended(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-      }
-
-      function showInfo(event, d) {
-        document.getElementById("info-name").innerText = d.name;
-        document.getElementById("info-img").src = d.img;
-        document.getElementById("info-role").innerText =
-          d.role === "dean" ? "Декан" : d.role === "zam" ? "Зам. декана" : "Преподаватель";
-        document.getElementById("info-panel").classList.add("active");
-      }
-    }
-
-    loadStaff();
+    // рисуем первый по умолчанию
+    drawGraph(data[0]);
   </script>
 </body>
 </html>
