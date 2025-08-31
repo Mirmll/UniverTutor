@@ -19,7 +19,11 @@
       {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
       {"role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс"},
       {"role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон"},
-      {"role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт"}
+      {"role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт"},
+      {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
+      {"role": "teacher", "img": "img/_3Be3Da__.png", "name": "Виолетта Уэйн"},
+      {"role": "teacher", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"},
+
     ]
   },
   {
@@ -36,6 +40,7 @@
     ]
   }
 ]
+
 
 
 
