@@ -1,184 +1,449 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Teacher Graph</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Университет RPM — оргструктура</title>
+  <link rel="icon" href="img/UniLogo.png" type="image/png">
   <style>
-    body {
-      margin: 0;
-      background: radial-gradient(circle at center, #0b1a2e 0%, #050c16 100%);
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+    :root{
+      --bg:#070912;
+      --panel:#0f1324cc;
+      --text:#e9ecff;
+      --muted:#9aa3c7;
+      --accent:#7aa2ff;
+      --gold:#ffd369;
+      --dean:#ff3b6b;
+      --zam:#ffd369;
+      --teacher:#4aa8ff;
     }
-    #controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.4);
-      padding: 10px;
-      border-radius: 8px;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 70% 10%, #121831 0%, #070912 55%) fixed;
+      overflow:hidden;
     }
-    select {
-      padding: 5px;
-      font-size: 14px;
+
+    header{
+      position:fixed; inset:16px 16px auto 16px;
+      background:linear-gradient(180deg,#121733aa,#0b0f1f99);
+      border:1px solid #1c2347; backdrop-filter: blur(8px);
+      border-radius:18px; padding:12px 16px; z-index:10;
+      display:flex; gap:14px; align-items:center; box-shadow:0 10px 40px #0008;
     }
-    canvas {
-      display: block;
+    header h1{
+      margin:0; font-size:16px; letter-spacing:.3px; color:#cfd6ff; font-weight:700;
+    }
+    .tag{
+      font:600 12px/1 system-ui; color:#99a3d1; padding:6px 10px; border-radius:999px;
+      border:1px solid #2a3263; background:#0e1230cc;
+    }
+    .controls{
+      margin-left:auto; display:flex; gap:8px;
+    }
+    .btn{
+      cursor:pointer; border:none; border-radius:12px; padding:8px 12px; font-weight:700;
+      color:#fff; background:linear-gradient(135deg,#6ea1ff,#4e7bff); box-shadow:0 6px 20px #4e7bff55;
+      transition:transform .15s ease, box-shadow .15s ease, opacity .2s;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 10px 28px #4e7bff66;}
+    .btn:active{ transform:translateY(0); opacity:.9 }
+
+    #date{
+      margin-left:8px; color:var(--muted); font-weight:600; letter-spacing:.2px;
+    }
+
+    #legend{
+      position:fixed; right:16px; top:16px; z-index:10;
+      background:var(--panel); border:1px solid #1b2142; border-radius:18px;
+      padding:12px 14px; display:flex; gap:14px; align-items:center;
+      box-shadow:0 10px 40px #0008;
+    }
+    .dot{ width:10px; height:10px; border-radius:50%;}
+    .row{ display:flex; align-items:center; gap:8px; color:#c8cffc; font-size:12px; }
+
+    #side{
+      position:fixed; right:16px; bottom:16px; z-index:10;
+      width:280px; max-width:calc(100vw - 32px);
+      background:var(--panel); border:1px solid #1b2142; border-radius:18px;
+      padding:14px; display:none; box-shadow:0 10px 40px #0008;
+    }
+    #side.active{ display:block; }
+    #side img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; border:1px solid #202858; }
+    #side h3{ margin:10px 0 4px; font-size:16px; }
+    #side p{ margin:0; color:#a7b0db; font-size:13px; }
+
+    canvas{ display:block; position:fixed; inset:0; }
+
+    /* красивые подсказки */
+    .hint{
+      position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
+      background:#0b0f1fbb; border:1px solid #1a2147; border-radius:999px; padding:8px 12px;
+      color:#b6c0ef; font-size:12px; z-index:10; user-select:none;
+      box-shadow:0 8px 30px #0008;
+    }
+    @media (max-width:720px){
+      #legend{ display:none; }
+      #side{ width:auto; }
+      header{ inset:8px }
     }
   </style>
 </head>
 <body>
-  <div id="controls">
-    <label>Период:</label>
-    <select id="rangeSelect"></select>
+  <header>
+    <h1>Оргструктура факультета</h1>
+    <span class="tag">ЛКМ — перетаскивание</span>
+    <span class="tag">ЛКМ по кругу — таскать узел</span>
+    <span id="date" class="tag">Загрузка…</span>
+    <div class="controls">
+      <button class="btn" id="prevBtn">⟵ Назад</button>
+      <button class="btn" id="nextBtn">Вперёд ⟶</button>
+      <button class="btn" id="shuffleBtn" title="Пересчитать случайные длины">🎲 Длины</button>
+      <button class="btn" id="resetViewBtn" title="Сбросить панораму">🔄 Вид</button>
+    </div>
+  </header>
+
+  <div id="legend">
+    <div class="row"><span class="dot" style="background:var(--dean)"></span><span>Декан</span></div>
+    <div class="row"><span class="dot" style="background:var(--zam)"></span><span>Зам. декана</span></div>
+    <div class="row"><span class="dot" style="background:var(--teacher)"></span><span>Преподаватель</span></div>
+    <div class="row"><span class="dot" style="background:linear-gradient(90deg,var(--gold),#ffffff)"></span><span>Связи</span></div>
   </div>
-  <canvas id="canvas"></canvas>
+
+  <div id="side">
+    <img id="sideImg" alt="">
+    <h3 id="sideName">—</h3>
+    <p id="sideRole">—</p>
+  </div>
+
+  <div class="hint">Перетаскивай фон ЛКМ, а кружки — хватай и таскай. Клик по кругу — открыть карточку.</div>
+
+  <canvas id="stars"></canvas>
+  <canvas id="graph"></canvas>
 
   <script>
-    // ===== JSON =====
-    const data = [
-      {
-        "range": "11.08.2025 – 11.09.2025",
-        "staff": [
-          { "id": "dean1", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "zam1", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "zam2", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "teach1", "role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу" },
-          { "id": "teach2", "role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк" },
-          { "id": "teach3", "role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ" },
-          { "id": "teach4", "role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко" },
-          { "id": "teach5", "role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити" },
-          { "id": "teach6", "role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз" },
-          { "id": "teach7", "role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе" },
-          { "id": "teach8", "role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот" },
-          { "id": "teach9", "role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин" },
-          { "id": "teach10", "role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли" },
-          { "id": "teach11", "role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс" },
-          { "id": "teach12", "role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон" },
-          { "id": "teach13", "role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт" }
-        ]
-      },
-      {
-        "range": "11.09.2025 – 11.10.2025",
-        "staff": [
-          { "id": "dean2", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "zam3", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "zam4", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "teach14", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "teach15", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-          { "id": "teach16", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" }
-        ]
+  // ========= УТИЛЫ =========
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  const rand=(a,b)=>Math.random()*(b-a)+a;
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const TAU=Math.PI*2;
+
+  // ========= ЗВЁЗДЫ =========
+  const starCanvas=document.getElementById('stars');
+  const starCtx=starCanvas.getContext('2d');
+  let stars=[];
+  function resizeStars(){
+    starCanvas.width=innerWidth; starCanvas.height=innerHeight;
+    const n= Math.round((innerWidth*innerHeight)/9000);
+    stars = Array.from({length:n},()=>({
+      x:Math.random()*innerWidth,
+      y:Math.random()*innerHeight,
+      r:Math.random()*1.8+0.2,
+      s:Math.random()*0.6+0.2  // speed parallax
+    }));
+  }
+  function drawStars(offset){
+    starCtx.clearRect(0,0,starCanvas.width,starCanvas.height);
+    starCtx.globalCompositeOperation='lighter';
+    for(const s of stars){
+      const x = (s.x - offset.x*s.s)%starCanvas.width;
+      const y = (s.y - offset.y*s.s)%starCanvas.height;
+      starCtx.beginPath();
+      starCtx.arc(x<0?x+starCanvas.width:x, y<0?y+starCanvas.height:y, s.r, 0, TAU);
+      starCtx.fillStyle='rgba(200,220,255,.9)';
+      starCtx.fill();
+    }
+    starCtx.globalCompositeOperation='source-over';
+  }
+
+  // ========= ГРАФ =========
+  const canvas=document.getElementById('graph');
+  const ctx=canvas.getContext('2d');
+  function resizeGraph(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+  window.addEventListener('resize',()=>{ resizeStars(); resizeGraph(); });
+
+  // камеру можно двигать
+  const camera = { x:0, y:0, scale:1 };
+
+  // Данные
+  let periods=[], current=0;
+
+  // Узлы/связи
+  let nodes=[], links=[];
+
+  // Физика
+  const SPRING_K = 0.004;           // жёсткость пружины
+  const REPULSE = 11000;            // сила отталкивания
+  const FRICTION = 0.85;            // трение
+  const CENTERING = 0.002;          // стремление к центру видимой области
+
+  // Перетаскивание
+  let dragNode=null;
+  let isPanning=false;
+  let panStart={x:0,y:0};
+  let cameraStart={x:0,y:0};
+
+  // Карточка
+  const side = {
+    el: document.getElementById('side'),
+    img: document.getElementById('sideImg'),
+    name: document.getElementById('sideName'),
+    role: document.getElementById('sideRole'),
+    open(n){
+      this.img.src=n.img; this.name.textContent=n.name;
+      this.role.textContent = n.role==='dean'?'Декан': n.role==='zam'?'Заместитель декана':'Преподаватель';
+      this.el.classList.add('active');
+    }
+  };
+
+  // =========== ЗАГРУЗКА ===========
+  async function load(){
+    resizeStars(); resizeGraph();
+    const res = await fetch('staff.json'); // структура: [{range, staff:[{role,img,name},...]}, ...] :contentReference[oaicite:2]{index=2}
+    periods = await res.json();
+    buildFromPeriod(0);
+    document.getElementById('prevBtn').onclick=()=>switchPeriod(-1);
+    document.getElementById('nextBtn').onclick=()=>switchPeriod(+1);
+    document.getElementById('shuffleBtn').onclick=()=>randomizeLinkLengths(true);
+    document.getElementById('resetViewBtn').onclick=resetView;
+    loop();
+  }
+
+  function switchPeriod(dir){
+    current = (current + dir + periods.length) % periods.length;
+    buildFromPeriod(current);
+  }
+
+  function buildFromPeriod(i){
+    const period = periods[i];
+    document.getElementById('date').textContent = period.range;
+    const staff = period.staff.map(p=>({ id:p.name, name:p.name, role:p.role, img:p.img }));
+
+    // найти декана
+    const dean = staff.find(p=>p.role==='dean');
+    // сформировать узлы
+    nodes = staff.map((p,idx)=>({
+      id:p.id, name:p.name, role:p.role, img:p.img,
+      x: innerWidth/2 + Math.cos(idx)*rand(40,140),
+      y: innerHeight/2 + Math.sin(idx)*rand(40,140),
+      vx:0, vy:0, r: p.role==='dean'? 42 : p.role==='zam'? 34 : 30
+    }));
+
+    // связи: все -> декан; у замов — тип 'zam' (золотые линии), у преподов — 'teacher' (белые)
+    links = [];
+    if(dean){
+      for(const p of staff){
+        if(p===dean) continue;
+        links.push({
+          a: p.name, b: dean.name,
+          type: (p.role==='zam' ? 'zam' : 'teacher'),
+          len: rand(140, 320),       // СЛУЧАЙНЫЕ длины связей
+          w: rand(1.2, 3.0)          // слегка разная толщина для эстетики
+        });
       }
-    ];
+    }
+    resetView();
+  }
 
-    // ===== CANVAS =====
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+  function randomizeLinkLengths(jump=false){
+    for(const L of links){
+      L.len = rand(140, 320);
+      L.w = rand(1.2,3.0);
+    }
+    if(jump){
+      // лёгкий «пинок», чтобы граф перестроился
+      for(const n of nodes){ n.vx += rand(-2,2); n.vy += rand(-2,2); }
+    }
+  }
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  function resetView(){ camera.x=0; camera.y=0; camera.scale=1; }
+
+  // ========= ВСПОМОГАТЕЛЬНОЕ =========
+  function nodeById(id){ return nodes.find(n=>n.id===id); }
+
+  function roleColor(role){
+    if(role==='dean') return getComputedStyle(document.documentElement).getPropertyValue('--dean').trim();
+    if(role==='zam') return getComputedStyle(document.documentElement).getPropertyValue('--zam').trim();
+    return getComputedStyle(document.documentElement).getPropertyValue('--teacher').trim();
+  }
+
+  // предварительная загрузка изображений
+  const imageCache = new Map();
+  function getImage(src){
+    if(imageCache.has(src)) return imageCache.get(src);
+    const img = new Image(); img.src=src;
+    imageCache.set(src,img); return img;
+  }
+
+  // ========= ИНПУТ =========
+  canvas.addEventListener('mousedown', (e)=>{
+    const p = screenToWorld(e.clientX, e.clientY);
+    dragNode = pickNode(p.x, p.y);
+    if(dragNode){
+      isPanning=false;
+    }else{
+      isPanning=true;
+      panStart={x:e.clientX, y:e.clientY};
+      cameraStart={x:camera.x, y:camera.y};
+    }
+  });
+  canvas.addEventListener('mousemove', (e)=>{
+    if(dragNode){
+      const p = screenToWorld(e.clientX, e.clientY);
+      dragNode.x = p.x; dragNode.y = p.y;
+      dragNode.vx = 0; dragNode.vy = 0;
+    }else if(isPanning){
+      camera.x = cameraStart.x - (e.clientX - panStart.x)/camera.scale;
+      camera.y = cameraStart.y - (e.clientY - panStart.y)/camera.scale;
+    }
+  });
+  window.addEventListener('mouseup', ()=>{ dragNode=null; isPanning=false; });
+
+  canvas.addEventListener('click', (e)=>{
+    const p = screenToWorld(e.clientX, e.clientY);
+    const n = pickNode(p.x, p.y);
+    if(n){ side.open(n); }
+  });
+
+  // колёсико — необязательно, но приятно
+  canvas.addEventListener('wheel', (e)=>{
+    e.preventDefault();
+    const mouse = screenToWorld(e.clientX, e.clientY);
+    const s0 = camera.scale;
+    const factor = Math.exp(-e.deltaY*0.0015);
+    camera.scale = clamp(camera.scale*factor, 0.4, 2.5);
+    // зум к курсору
+    camera.x = mouse.x - (mouse.x - camera.x) * (s0/camera.scale);
+    camera.y = mouse.y - (mouse.y - camera.y) * (s0/camera.scale);
+  }, {passive:false});
+
+  function pickNode(x,y){
+    for(let i=nodes.length-1;i>=0;i--){
+      const n=nodes[i];
+      const dx=x-n.x, dy=y-n.y;
+      if(dx*dx+dy*dy <= (n.r+6)*(n.r+6)) return n;
+    }
+    return null;
+  }
+
+  function screenToWorld(sx,sy){
+    return { x: sx/camera.scale + camera.x, y: sy/camera.scale + camera.y };
+  }
+
+  // ========= СИМУЛЯЦИЯ =========
+  function stepPhysics(dt){
+    // отталкивание
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a=nodes[i], b=nodes[j];
+        let dx=a.x-b.x, dy=a.y-b.y;
+        let d2 = dx*dx+dy*dy;
+        let d = Math.sqrt(d2)+0.001;
+        const minDist = (a.r+b.r)+18;
+        if(d < minDist) {
+          // мягкое толкание
+          const f = (minDist - d)*0.02;
+          dx/=d; dy/=d;
+          a.x += dx*f; a.y += dy*f;
+          b.x -= dx*f; b.y -= dy*f;
+        } else {
+          // кулоновское отталкивание
+          const f = REPULSE/d2;
+          dx/=d; dy/=d;
+          a.vx += dx*f; a.vy += dy*f;
+          b.vx -= dx*f; b.vy -= dy*f;
+        }
+      }
+    }
+    // пружины к декану (каждая связь)
+    for(const L of links){
+      const A=nodeById(L.a), B=nodeById(L.b);
+      let dx=A.x-B.x, dy=A.y-B.y;
+      let d=Math.sqrt(dx*dx+dy*dy)+0.001;
+      const ext = d - L.len;           // насколько растянулась
+      const f = SPRING_K*ext;
+      dx/=d; dy/=d;
+      // тянем к желаемой длине
+      A.vx -= dx*f; A.vy -= dy*f;
+      B.vx += dx*f; B.vy += dy*f;
+    }
+    // стремление к центру
+    const targetX = innerWidth/2 + camera.x;
+    const targetY = innerHeight/2 + camera.y;
+    for(const n of nodes){
+      n.vx += (targetX - n.x)*CENTERING;
+      n.vy += (targetY - n.y)*CENTERING;
+    }
+    // интеграция
+    for(const n of nodes){
+      n.x += n.vx*dt; n.y += n.vy*dt;
+      n.vx *= FRICTION; n.vy *= FRICTION;
+    }
+  }
+
+  // ========= РЕНДЕР =========
+  function draw(){
+    ctx.setTransform(camera.scale,0,0,camera.scale, -camera.x*camera.scale, -camera.y*camera.scale);
+    // фон звёзд с параллаксом
+    drawStars({x:camera.x, y:camera.y});
+
+    // связи
+    for(const L of links){
+      const A=nodeById(L.a), B=nodeById(L.b);
+      const grad = ctx.createLinearGradient(A.x,A.y,B.x,B.y);
+      if(L.type==='zam'){ grad.addColorStop(0,'#ffe08a'); grad.addColorStop(1,'#ffbb33'); }
+      else{ grad.addColorStop(0,'#e9f0ff'); grad.addColorStop(1,'#94a6ff'); }
+      ctx.lineWidth=L.w;
+      ctx.strokeStyle=grad;
+      ctx.globalAlpha=0.95;
+      ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.stroke();
+      ctx.globalAlpha=1;
     }
 
-    // кэш изображений
-    const imgCache = {};
-    function loadImage(src) {
-      if (imgCache[src]) return imgCache[src];
-      const img = new Image();
-      img.src = src;
-      imgCache[src] = img;
-      return img;
-    }
+    // узлы
+    for(const n of nodes){
+      // ореол
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r+10,0,TAU);
+      ctx.fillStyle = 'rgba(120,160,255,0.04)'; ctx.fill();
 
-    // ===== РЕНДЕР =====
-    let angle = 0;
-    let currentPeriod = data[0];
+      // внешний круг
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,TAU);
+      ctx.fillStyle=roleColor(n.role); ctx.fill();
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // обводка
+      ctx.lineWidth=2.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.stroke();
 
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-
-      const dean = currentPeriod.staff.find(s => s.role === "dean");
-      const zams = currentPeriod.staff.filter(s => s.role === "zam");
-      const teachers = currentPeriod.staff.filter(s => s.role === "teacher");
-
-      const positions = {};
-
-      // декан
-      positions[dean.id] = { x: centerX, y: centerY };
-      drawNode(dean, centerX, centerY);
-
-      // замы (малый круг)
-      const r1 = 200;
-      zams.forEach((s, i) => {
-        const a = angle + (i / zams.length) * Math.PI * 2;
-        const x = centerX + Math.cos(a) * r1;
-        const y = centerY + Math.sin(a) * r1;
-        positions[s.id] = { x, y };
-        drawNode(s, x, y);
-        drawLine(positions[dean.id], { x, y });
-      });
-
-      // учителя (большой круг)
-      const r2 = 400;
-      teachers.forEach((s, i) => {
-        const a = -angle + (i / teachers.length) * Math.PI * 2;
-        const x = centerX + Math.cos(a) * r2;
-        const y = centerY + Math.sin(a) * r2;
-        positions[s.id] = { x, y };
-        drawNode(s, x, y);
-        drawLine(positions[dean.id], { x, y });
-      });
-
-      angle += 0.002;
-      requestAnimationFrame(draw);
-    }
-
-    function drawLine(a, b) {
-      ctx.strokeStyle = "rgba(255,255,255,0.4)";
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b.x, b.y);
-      ctx.stroke();
-    }
-
-    function drawNode(s, x, y) {
-      const img = loadImage(s.img);
-      const size = 60;
+      // маска изображения (круг)
+      const img = getImage(n.img);
+      const size = n.r*1.4;
       ctx.save();
-      ctx.beginPath();
-      ctx.arc(x, y, size/2, 0, Math.PI*2);
-      ctx.closePath();
-      ctx.clip();
-      ctx.drawImage(img, x - size/2, y - size/2, size, size);
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r-4,0,TAU); ctx.clip();
+      ctx.drawImage(img, n.x-size/2, n.y-size/2, size, size);
       ctx.restore();
 
-      ctx.fillStyle = "white";
-      ctx.font = "14px Arial";
-      ctx.textAlign = "center";
-      ctx.fillText(s.name, x, y + size/2 + 15);
+      // подпись
+      ctx.font='600 12px system-ui';
+      ctx.textAlign='center'; ctx.textBaseline='top';
+      ctx.fillStyle='rgba(210,220,255,.95)';
+      ctx.fillText(n.name, n.x, n.y+n.r+8);
     }
+  }
 
-    // ===== КОНТРОЛЫ =====
-    const rangeSelect = document.getElementById("rangeSelect");
-    data.forEach((period, i) => {
-      const opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = period.range;
-      rangeSelect.appendChild(opt);
-    });
-    rangeSelect.addEventListener("change", () => {
-      currentPeriod = data[rangeSelect.value];
-    });
-
-    // старт
+  // ========= ЦИКЛ =========
+  let last=performance.now();
+  function loop(now=performance.now()){
+    const dt = clamp((now-last)/16, 0.5, 2.0); last=now;
+    stepPhysics(dt);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     draw();
+    requestAnimationFrame(loop);
+  }
+
+  // Пуск
+  load();
   </script>
 </body>
 </html>
