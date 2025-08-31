@@ -1,34 +1,52 @@
 [
   {
-    "range": "11.08.2025 – 11.09.2025",
+    "range": "2023–2024",
     "staff": [
-      {"role": "dean", "img": "img/dean.png", "name": "??"},
-      {"role": "zam", "img": "img/zam1.png", "name": "??"},
-      {"role": "zam", "img": "img/zam2.png", "name": "??"},
-
-      {"role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу"},
-      {"role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк"},
-      {"role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ"},
-      {"role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко"},
-      {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
-      {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
-      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Лансере-Блэквуд"},
-      {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
-      {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
-      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"}
+      {
+        "role": "dean",
+        "name": "Иван Петров",
+        "img": "img/dean.jpg"
+      },
+      {
+        "role": "zam",
+        "name": "Мария Сидорова",
+        "img": "img/zam1.jpg"
+      },
+      {
+        "role": "zam",
+        "name": "Алексей Орлов",
+        "img": "img/zam2.jpg"
+      },
+      {
+        "role": "teacher",
+        "name": "Елена Кузнецова",
+        "img": "img/teacher1.jpg"
+      },
+      {
+        "role": "teacher",
+        "name": "Дмитрий Иванов",
+        "img": "img/teacher2.jpg"
+      }
     ]
   },
   {
-    "range": "11.09.2025 – 11.10.2025",
+    "range": "2024–2025",
     "staff": [
-      {"role": "dean", "img": "img/dean.png", "name": "??"},
-      {"role": "zam", "img": "img/zam1.png", "name": "??"},
-      {"role": "zam", "img": "img/zam2.png", "name": "??"},
-
-      {"role": "teacher", "img": "img/teacher-a.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher-b.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher-c.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher-d.png", "name": "??"}
+      {
+        "role": "dean",
+        "name": "Сергей Николаев",
+        "img": "img/dean2.jpg"
+      },
+      {
+        "role": "zam",
+        "name": "Ольга Петрова",
+        "img": "img/zam3.jpg"
+      },
+      {
+        "role": "teacher",
+        "name": "Павел Смирнов",
+        "img": "img/teacher3.jpg"
+      }
     ]
   }
 ]
