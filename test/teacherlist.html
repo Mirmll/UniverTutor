@@ -129,27 +129,13 @@
       100% { background: linear-gradient(var(--card), var(--card)) padding-box, conic-gradient(from 360deg, red, orange, red) border-box; }
     }
 
-    .zam {
-      border: 3px solid gold;
-    }
+    .zam { border: 3px solid gold; }
+    .zam img { border: 3px solid rgb(145, 128, 34); }
 
-    .zam img {
-      border: 3px solid rgb(145, 128, 34);
-    }
+    .slide { display: none; animation: fade 0.5s; }
+    .slide.active { display: block; }
 
-    .slide {
-      display: none;
-      animation: fade 0.5s;
-    }
-
-    .slide.active {
-      display: block;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
     .date-range {
       margin-bottom: 20px;
@@ -183,11 +169,6 @@
       box-shadow: 0 6px 16px rgba(91, 156, 255, .6);
     }
 
-    .controls button:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px rgba(91, 156, 255, .4);
-    }
-
     footer {
       background: #141828;
       border-top: 1px solid #23273a;
@@ -195,14 +176,14 @@
       text-align: center;
     }
 
-    /* Панель справа */
+    /* панель справа */
     #info-panel {
       position: fixed;
       top: 0;
       right: -300px;
       width: 280px;
       height: 100%;
-      background: rgba(20,20,30,0.95);
+      background: rgba(10,10,20,0.9);
       color: white;
       padding: 20px;
       transition: right 0.3s;
@@ -213,7 +194,7 @@
     #info-panel.active { right: 0; }
     #info-panel img { width: 100%; border-radius: 12px; margin: 10px 0; }
 
-    /* Секретная кнопка */
+    /* секретная кнопка */
     #secret-btn {
       position: fixed;
       bottom: 20px;
@@ -223,6 +204,21 @@
       background: transparent;
       cursor: pointer;
       z-index: 9999;
+    }
+
+    /* фон со звёздами */
+    body.alt-mode {
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+    }
+
+    canvas#starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
   </style>
 </head>
@@ -252,7 +248,7 @@
     <p>© 2025 Университет RPM</p>
   </footer>
 
-  <!-- Секретная кнопка -->
+  <!-- секретная кнопка -->
   <div id="secret-btn"></div>
 
   <div id="info-panel">
@@ -334,8 +330,10 @@
     document.getElementById("secret-btn").addEventListener("click", () => {
       altMode = !altMode;
       if (altMode) {
+        document.body.classList.add("alt-mode");
         launchTreeMode();
       } else {
+        document.body.classList.remove("alt-mode");
         launchNormalMode();
       }
     });
@@ -344,11 +342,52 @@
       document.getElementById("slidesContainer").style.display = "block";
       document.querySelector("svg")?.remove();
       document.getElementById("info-panel").classList.remove("active");
+      document.getElementById("starfield")?.remove();
     }
 
     async function launchTreeMode() {
       document.getElementById("slidesContainer").style.display = "none";
 
+      document.querySelector("svg")?.remove();
+      document.getElementById("starfield")?.remove();
+
+      // фон со звёздами
+      const starCanvas = document.createElement("canvas");
+      starCanvas.id = "starfield";
+      document.body.appendChild(starCanvas);
+
+      const ctx = starCanvas.getContext("2d");
+      let stars = [];
+      function resizeStars() {
+        starCanvas.width = window.innerWidth;
+        starCanvas.height = window.innerHeight;
+        stars = Array.from({length: 200}, () => ({
+          x: Math.random()*starCanvas.width,
+          y: Math.random()*starCanvas.height,
+          r: Math.random()*2,
+          dx: (Math.random()-0.5)*0.5,
+          dy: (Math.random()-0.5)*0.5
+        }));
+      }
+      resizeStars();
+      window.addEventListener("resize", resizeStars);
+
+      function animateStars() {
+        ctx.clearRect(0,0,starCanvas.width,starCanvas.height);
+        ctx.fillStyle = "white";
+        stars.forEach(s => {
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fill();
+          s.x += s.dx; s.y += s.dy;
+          if(s.x<0||s.x>starCanvas.width) s.dx*=-1;
+          if(s.y<0||s.y>starCanvas.height) s.dy*=-1;
+        });
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
+
+      // данные
       const res = await fetch("staff.json");
       const data = await res.json();
       const staff = data[current].staff;
@@ -360,34 +399,35 @@
         role: p.role
       }));
 
+      // связи
       let links = [];
       const dean = people.find(p => p.role === "dean");
       const zams = people.filter(p => p.role === "zam");
       const teachers = people.filter(p => p.role === "teacher");
 
       if (dean) {
-        zams.forEach(z => links.push({ source: dean.id, target: z.id }));
-        teachers.forEach(t => links.push({ source: dean.id, target: t.id }));
+        zams.forEach(z => links.push({ source: dean.id, target: z.id, type: "zam" }));
+        teachers.forEach(t => links.push({ source: dean.id, target: t.id, type: "teacher" }));
       }
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      d3.select("svg").remove();
       const svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height);
 
       const simulation = d3.forceSimulation(people)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(200))
-        .force("charge", d3.forceManyBody().strength(-600))
+        .force("link", d3.forceLink(links).id(d => d.id).distance(250))
+        .force("charge", d3.forceManyBody().strength(-900))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
       const link = svg.append("g")
         .selectAll("line")
         .data(links)
         .join("line")
-        .attr("stroke", "#888")
-        .attr("stroke-width", 2);
+        .attr("stroke", d => d.type==="zam" ? "gold" : "white")
+        .attr("stroke-width", 3)
+        .attr("opacity",0.8);
 
       const node = svg.append("g")
         .selectAll("g")
@@ -400,20 +440,23 @@
           .on("end", dragended));
 
       node.append("circle")
-        .attr("r", 40)
-        .attr("fill", "#fff")
+        .attr("r", 45)
+        .attr("fill", d => d.role==="dean" ? "crimson" : d.role==="zam" ? "gold" : "dodgerblue")
+        .attr("stroke","#fff")
+        .attr("stroke-width",3)
+        .style("filter","drop-shadow(0 0 10px rgba(255,255,255,0.7))")
         .on("click", showInfo);
 
       node.append("image")
         .attr("xlink:href", d => d.img)
-        .attr("x", -30)
-        .attr("y", -30)
-        .attr("width", 60)
-        .attr("height", 60)
-        .attr("clip-path", "circle(30px at 30px 30px)");
+        .attr("x", -35)
+        .attr("y", -35)
+        .attr("width", 70)
+        .attr("height", 70)
+        .attr("clip-path", "circle(35px at 35px 35px)");
 
       node.append("text")
-        .attr("dy", 55)
+        .attr("dy", 65)
         .attr("text-anchor", "middle")
         .attr("fill", "#fff")
         .text(d => d.name);
@@ -433,12 +476,10 @@
         d.fx = d.x;
         d.fy = d.y;
       }
-
       function dragged(event, d) {
         d.fx = event.x;
         d.fy = event.y;
       }
-
       function dragended(event, d) {
         if (!event.active) simulation.alphaTarget(0);
         d.fx = null;
