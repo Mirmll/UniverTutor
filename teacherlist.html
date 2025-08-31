@@ -7,6 +7,12 @@
   <title>Университет RPM West</title>
   <link rel="icon" href="img/UniLogo.png" type="image/png">
   <style>
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: transparent;
+    }
     :root {
       --bg: #0f1115;
       --card: #171924;
@@ -247,6 +253,7 @@ nav a:hover {
 </head>
 
 <body>
+  <canvas id="stars"></canvas>
   <header>
     <h1>Университет RPM</h1>
     <nav>
@@ -341,6 +348,60 @@ nav a:hover {
     }
 
     loadStaff();
+
+    // ==== ЗВЁЗДЫ ====
+    const starCanvas = document.getElementById('stars');
+    const ctx = starCanvas.getContext('2d');
+    let stars = [];
+    const colors = ["#ffffff", "#ffe9c4", "#d4fbff", "#ffd1dc", "#cfd9ff"]; // белые, желтоватые, голубые, розоватые
+
+    function resizeStars() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+      const n = Math.floor((window.innerWidth * window.innerHeight) / 8000);
+      stars = Array.from({ length: n }, () => ({
+        x: Math.random() * starCanvas.width,
+        y: Math.random() * starCanvas.height,
+        r: Math.random() * 1.8 + 0.5,
+        dx: (Math.random() - 0.5) * 0.15,
+        dy: (Math.random() - 0.5) * 0.15,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        twinkle: Math.random() * 100
+      }));
+    }
+    window.addEventListener('resize', resizeStars);
+    resizeStars();
+
+    function drawStars() {
+      ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      for (const s of stars) {
+        s.x += s.dx;
+        s.y += s.dy;
+
+        // выход за экран → перенос на другую сторону
+        if (s.x < 0) s.x = starCanvas.width;
+        if (s.x > starCanvas.width) s.x = 0;
+        if (s.y < 0) s.y = starCanvas.height;
+        if (s.y > starCanvas.height) s.y = 0;
+
+        // мерцание
+        s.twinkle += 0.05 + Math.random() * 0.02;
+        const alpha = 0.5 + 0.5 * Math.sin(s.twinkle);
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function animateStars() {
+      drawStars();
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
   </script>
 
 </body>
