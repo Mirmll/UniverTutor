@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      background: #0b1a2e;
+      background: radial-gradient(circle at center, #0b1a2e 0%, #050c16 100%);
       color: white;
       font-family: Arial, sans-serif;
       overflow: hidden;
@@ -15,7 +15,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.4);
       padding: 10px;
       border-radius: 8px;
     }
@@ -30,14 +30,13 @@
 </head>
 <body>
   <div id="controls">
-    <label>Выбери период:</label>
+    <label>Период:</label>
     <select id="rangeSelect"></select>
   </div>
   <canvas id="canvas"></canvas>
 
   <script>
-    // ========== ТВОЙ JSON ==========
-
+    // ===== JSON =====
     const data = [
       {
         "range": "11.08.2025 – 11.09.2025",
@@ -58,23 +57,6 @@
           { "id": "teach11", "role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс" },
           { "id": "teach12", "role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон" },
           { "id": "teach13", "role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт" }
-        ],
-        "links": [
-          { "source": "dean1", "target": "zam1" },
-          { "source": "dean1", "target": "zam2" },
-          { "source": "dean1", "target": "teach1" },
-          { "source": "dean1", "target": "teach2" },
-          { "source": "dean1", "target": "teach3" },
-          { "source": "dean1", "target": "teach4" },
-          { "source": "dean1", "target": "teach5" },
-          { "source": "dean1", "target": "teach6" },
-          { "source": "dean1", "target": "teach7" },
-          { "source": "dean1", "target": "teach8" },
-          { "source": "dean1", "target": "teach9" },
-          { "source": "dean1", "target": "teach10" },
-          { "source": "dean1", "target": "teach11" },
-          { "source": "dean1", "target": "teach12" },
-          { "source": "dean1", "target": "teach13" }
         ]
       },
       {
@@ -86,19 +68,11 @@
           { "id": "teach14", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
           { "id": "teach15", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
           { "id": "teach16", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" }
-        ],
-        "links": [
-          { "source": "dean2", "target": "zam3" },
-          { "source": "dean2", "target": "zam4" },
-          { "source": "dean2", "target": "teach14" },
-          { "source": "dean2", "target": "teach15" },
-          { "source": "dean2", "target": "teach16" }
         ]
       }
     ];
 
-    // ========== CANVAS РЕНДЕР ==========
-
+    // ===== CANVAS =====
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     resizeCanvas();
@@ -109,7 +83,7 @@
       canvas.height = window.innerHeight;
     }
 
-    // загружаем изображения
+    // кэш изображений
     const imgCache = {};
     function loadImage(src) {
       if (imgCache[src]) return imgCache[src];
@@ -119,69 +93,79 @@
       return img;
     }
 
-    // отрисовка графа
-    function drawGraph(period) {
+    // ===== РЕНДЕР =====
+    let angle = 0;
+    let currentPeriod = data[0];
+
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const staff = period.staff;
-      const links = period.links;
-
-      // находим декана (центр)
-      const dean = staff.find(s => s.role === "dean");
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // позиции
+      const dean = currentPeriod.staff.find(s => s.role === "dean");
+      const zams = currentPeriod.staff.filter(s => s.role === "zam");
+      const teachers = currentPeriod.staff.filter(s => s.role === "teacher");
+
       const positions = {};
+
+      // декан
       positions[dean.id] = { x: centerX, y: centerY };
+      drawNode(dean, centerX, centerY);
 
-      // круг для остальных
-      const radius = 300;
-      const others = staff.filter(s => s.id !== dean.id);
-      others.forEach((s, i) => {
-        const angle = (i / others.length) * Math.PI * 2;
-        positions[s.id] = {
-          x: centerX + Math.cos(angle) * radius,
-          y: centerY + Math.sin(angle) * radius
-        };
+      // замы (малый круг)
+      const r1 = 200;
+      zams.forEach((s, i) => {
+        const a = angle + (i / zams.length) * Math.PI * 2;
+        const x = centerX + Math.cos(a) * r1;
+        const y = centerY + Math.sin(a) * r1;
+        positions[s.id] = { x, y };
+        drawNode(s, x, y);
+        drawLine(positions[dean.id], { x, y });
       });
 
-      // рисуем связи
-      ctx.strokeStyle = "white";
-      ctx.lineWidth = 2;
-      links.forEach(link => {
-        const a = positions[link.source];
-        const b = positions[link.target];
-        if (!a || !b) return;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
+      // учителя (большой круг)
+      const r2 = 400;
+      teachers.forEach((s, i) => {
+        const a = -angle + (i / teachers.length) * Math.PI * 2;
+        const x = centerX + Math.cos(a) * r2;
+        const y = centerY + Math.sin(a) * r2;
+        positions[s.id] = { x, y };
+        drawNode(s, x, y);
+        drawLine(positions[dean.id], { x, y });
       });
 
-      // рисуем узлы
-      staff.forEach(s => {
-        const pos = positions[s.id];
-        const img = loadImage(s.img);
-        const size = 60;
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, size/2, 0, Math.PI*2);
-        ctx.closePath();
-        ctx.clip();
-        ctx.drawImage(img, pos.x - size/2, pos.y - size/2, size, size);
-        ctx.restore();
-
-        // подпись
-        ctx.fillStyle = "white";
-        ctx.font = "14px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText(s.name, pos.x, pos.y + size/2 + 15);
-      });
+      angle += 0.002;
+      requestAnimationFrame(draw);
     }
 
-    // ========== КОНТРОЛЫ ==========
+    function drawLine(a, b) {
+      ctx.strokeStyle = "rgba(255,255,255,0.4)";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
 
+    function drawNode(s, x, y) {
+      const img = loadImage(s.img);
+      const size = 60;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, size/2, 0, Math.PI*2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img, x - size/2, y - size/2, size, size);
+      ctx.restore();
+
+      ctx.fillStyle = "white";
+      ctx.font = "14px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText(s.name, x, y + size/2 + 15);
+    }
+
+    // ===== КОНТРОЛЫ =====
     const rangeSelect = document.getElementById("rangeSelect");
     data.forEach((period, i) => {
       const opt = document.createElement("option");
@@ -189,13 +173,12 @@
       opt.textContent = period.range;
       rangeSelect.appendChild(opt);
     });
-
     rangeSelect.addEventListener("change", () => {
-      drawGraph(data[rangeSelect.value]);
+      currentPeriod = data[rangeSelect.value];
     });
 
-    // рисуем первый по умолчанию
-    drawGraph(data[0]);
+    // старт
+    draw();
   </script>
 </body>
 </html>
