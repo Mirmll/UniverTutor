@@ -2,63 +2,33 @@
   {
     "range": "11.08.2025 – 11.09.2025",
     "staff": [
-      { "id": "dean1", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+      {"role": "dean", "img": "img/dean.png", "name": "??"},
+      {"role": "zam", "img": "img/zam1.png", "name": "??"},
+      {"role": "zam", "img": "img/zam2.png", "name": "??"},
 
-      { "id": "zam1", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-      { "id": "zam2", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-
-      { "id": "teach1", "role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу" },
-      { "id": "teach2", "role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк" },
-      { "id": "teach3", "role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ" },
-      { "id": "teach4", "role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко" },
-      { "id": "teach5", "role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити" },
-      { "id": "teach6", "role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз" },
-      { "id": "teach7", "role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе" },
-      { "id": "teach8", "role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот" },
-      { "id": "teach9", "role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин" },
-      { "id": "teach10", "role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли" },
-      { "id": "teach11", "role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс" },
-      { "id": "teach12", "role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон" },
-      { "id": "teach13", "role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт" }
-    ],
-    "links": [
-      { "source": "dean1", "target": "zam1", "type": "zam" },
-      { "source": "dean1", "target": "zam2", "type": "zam" },
-
-      { "source": "dean1", "target": "teach1", "type": "teacher" },
-      { "source": "dean1", "target": "teach2", "type": "teacher" },
-      { "source": "dean1", "target": "teach3", "type": "teacher" },
-      { "source": "dean1", "target": "teach4", "type": "teacher" },
-      { "source": "dean1", "target": "teach5", "type": "teacher" },
-      { "source": "dean1", "target": "teach6", "type": "teacher" },
-      { "source": "dean1", "target": "teach7", "type": "teacher" },
-      { "source": "dean1", "target": "teach8", "type": "teacher" },
-      { "source": "dean1", "target": "teach9", "type": "teacher" },
-      { "source": "dean1", "target": "teach10", "type": "teacher" },
-      { "source": "dean1", "target": "teach11", "type": "teacher" },
-      { "source": "dean1", "target": "teach12", "type": "teacher" },
-      { "source": "dean1", "target": "teach13", "type": "teacher" }
+      {"role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу"},
+      {"role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк"},
+      {"role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ"},
+      {"role": "teacher", "img": "img/Tinaida.png", "name": "Тинаида Добренко"},
+      {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
+      {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
+      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Лансере-Блэквуд"},
+      {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
+      {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
+      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"}
     ]
   },
   {
     "range": "11.09.2025 – 11.10.2025",
     "staff": [
-      { "id": "dean2", "role": "dean", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
+      {"role": "dean", "img": "img/dean.png", "name": "??"},
+      {"role": "zam", "img": "img/zam1.png", "name": "??"},
+      {"role": "zam", "img": "img/zam2.png", "name": "??"},
 
-      { "id": "zam3", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-      { "id": "zam4", "role": "zam", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-
-      { "id": "teach14", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-      { "id": "teach15", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" },
-      { "id": "teach16", "role": "teacher", "img": "https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg", "name": "??" }
-    ],
-    "links": [
-      { "source": "dean2", "target": "zam3", "type": "zam" },
-      { "source": "dean2", "target": "zam4", "type": "zam" },
-
-      { "source": "dean2", "target": "teach14", "type": "teacher" },
-      { "source": "dean2", "target": "teach15", "type": "teacher" },
-      { "source": "dean2", "target": "teach16", "type": "teacher" }
+      {"role": "teacher", "img": "img/teacher-a.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-b.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-c.png", "name": "??"},
+      {"role": "teacher", "img": "img/teacher-d.png", "name": "??"}
     ]
   }
 ]
