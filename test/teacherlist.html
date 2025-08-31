@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Университет RPM West</title>
+  <link rel="icon" href="img/UniLogo.png" type="image/png">
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171924;
+      --text: #e7e9ee;
+      --muted: #a7adbb;
+      --accent: #5b9cff;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #171924;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #f1f1f1;
+      text-decoration: none;
+      margin: 6px 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      color: #ffcc66;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .teacher {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 12px;
+      width: 160px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+      transition: transform 0.3s;
+    }
+
+    .teacher:hover {
+      transform: scale(1.05);
+    }
+
+    .teacher img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+      border: 2px solid #2b2f45;
+    }
+
+    .name {
+      margin-top: 10px;
+      background: #141828;
+      border-radius: 10px;
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    .dean {
+      position: relative;
+      border: 4px solid transparent;
+      border-radius: 16px;
+      background: linear-gradient(var(--card), var(--card)) padding-box, conic-gradient(from 0deg, red, orange, red) border-box;
+      animation: spinBorder 6s linear infinite;
+    }
+
+    .dean img {
+      border: 3px solid rgb(101, 37, 37);
+    }
+
+    @keyframes spinBorder {
+      0% { background: linear-gradient(var(--card), var(--card)) padding-box, conic-gradient(from 0deg, red, orange, red) border-box; }
+      100% { background: linear-gradient(var(--card), var(--card)) padding-box, conic-gradient(from 360deg, red, orange, red) border-box; }
+    }
+
+    .zam {
+      border: 3px solid gold;
+    }
+
+    .zam img {
+      border: 3px solid rgb(145, 128, 34);
+    }
+
+    .slide {
+      display: none;
+      animation: fade 0.5s;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .date-range {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .controls button {
+      background: linear-gradient(135deg, #5b9cff, #3a7add);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(91, 156, 255, .4);
+      transition: all .3s ease;
+    }
+
+    .controls button:hover {
+      background: linear-gradient(135deg, #6baeff, #4a8dff);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(91, 156, 255, .6);
+    }
+
+    .controls button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(91, 156, 255, .4);
+    }
+
+    footer {
+      background: #141828;
+      border-top: 1px solid #23273a;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Панель справа */
+    #info-panel {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: rgba(20,20,30,0.95);
+      color: white;
+      padding: 20px;
+      transition: right 0.3s;
+      overflow-y: auto;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      z-index: 9998;
+    }
+    #info-panel.active { right: 0; }
+    #info-panel img { width: 100%; border-radius: 12px; margin: 10px 0; }
+
+    /* Секретная кнопка */
+    #secret-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      cursor: pointer;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Университет RPM</h1>
+    <nav>
+      <a href="index.html">2FA + TGprotect</a>
+      <a href="locker.html">Смена скинов(гардероб)</a>
+      <a href="sync.html">Синхронизация</a>
+      <a href="teacherlist.html">Сотрудники</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Сотрудники</h2>
+    <div class="date-range" id="dateRange"></div>
+    <div id="slidesContainer"></div>
+
+    <div class="controls">
+      <button onclick="prevSlide()">⬅ Назад</button>
+      <button onclick="nextSlide()">Вперед ➡</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Университет RPM</p>
+  </footer>
+
+  <!-- Секретная кнопка -->
+  <div id="secret-btn"></div>
+
+  <div id="info-panel">
+    <h2 id="info-name"></h2>
+    <img id="info-img" src="" alt="">
+    <p id="info-role"></p>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    let current = 0;
+    let altMode = false;
+
+    async function loadStaff() {
+      const res = await fetch('staff.json');
+      const data = await res.json();
+      const container = document.getElementById('slidesContainer');
+
+      data.forEach(period => {
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+        slide.dataset.range = period.range;
+
+        const pyramid = document.createElement('div');
+        pyramid.classList.add('pyramid');
+
+        const deanRow = document.createElement('div'); deanRow.classList.add('row');
+        const zamRow = document.createElement('div'); zamRow.classList.add('row');
+        const teacherRow = document.createElement('div'); teacherRow.classList.add('row');
+
+        period.staff.forEach(person => {
+          const div = document.createElement('div'); div.classList.add('teacher');
+          if (person.role === 'dean') div.classList.add('dean');
+          if (person.role === 'zam') div.classList.add('zam');
+
+          const img = document.createElement('img'); img.src = person.img; img.alt = person.name;
+          img.onerror = () => img.src = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Question_book-new.svg';
+          div.appendChild(img);
+
+          const nameDiv = document.createElement('div'); nameDiv.classList.add('name');
+          nameDiv.innerHTML = person.name + (person.role === 'dean' ? '<br>(Декан)' : person.role === 'zam' ? '<br>(Зам. декана)' : '');
+          div.appendChild(nameDiv);
+
+          if (person.role === 'dean') deanRow.appendChild(div);
+          else if (person.role === 'zam') zamRow.appendChild(div);
+          else teacherRow.appendChild(div);
+        });
+
+        pyramid.appendChild(deanRow);
+        if (zamRow.children.length) pyramid.appendChild(zamRow);
+        if (teacherRow.children.length) pyramid.appendChild(teacherRow);
+
+        slide.appendChild(pyramid);
+        container.appendChild(slide);
+      });
+
+      showSlide(0);
+    }
+
+    function showSlide(i) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+      document.getElementById('dateRange').textContent = slides[i].dataset.range;
+    }
+
+    function nextSlide() {
+      const slides = document.querySelectorAll('.slide');
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      const slides = document.querySelectorAll('.slide');
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    }
+
+    document.getElementById("secret-btn").addEventListener("click", () => {
+      altMode = !altMode;
+      if (altMode) {
+        launchTreeMode();
+      } else {
+        launchNormalMode();
+      }
+    });
+
+    function launchNormalMode() {
+      document.getElementById("slidesContainer").style.display = "block";
+      document.querySelector("svg")?.remove();
+      document.getElementById("info-panel").classList.remove("active");
+    }
+
+    async function launchTreeMode() {
+      document.getElementById("slidesContainer").style.display = "none";
+
+      const res = await fetch("staff.json");
+      const data = await res.json();
+      const staff = data[current].staff;
+
+      const people = staff.map(p => ({
+        id: p.name,
+        name: p.name,
+        img: p.img,
+        role: p.role
+      }));
+
+      let links = [];
+      const dean = people.find(p => p.role === "dean");
+      const zams = people.filter(p => p.role === "zam");
+      const teachers = people.filter(p => p.role === "teacher");
+
+      if (dean) {
+        zams.forEach(z => links.push({ source: dean.id, target: z.id }));
+        teachers.forEach(t => links.push({ source: dean.id, target: t.id }));
+      }
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      d3.select("svg").remove();
+      const svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      const simulation = d3.forceSimulation(people)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(200))
+        .force("charge", d3.forceManyBody().strength(-600))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+      const link = svg.append("g")
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke", "#888")
+        .attr("stroke-width", 2);
+
+      const node = svg.append("g")
+        .selectAll("g")
+        .data(people)
+        .join("g")
+        .attr("class", "node")
+        .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+      node.append("circle")
+        .attr("r", 40)
+        .attr("fill", "#fff")
+        .on("click", showInfo);
+
+      node.append("image")
+        .attr("xlink:href", d => d.img)
+        .attr("x", -30)
+        .attr("y", -30)
+        .attr("width", 60)
+        .attr("height", 60)
+        .attr("clip-path", "circle(30px at 30px 30px)");
+
+      node.append("text")
+        .attr("dy", 55)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#fff")
+        .text(d => d.name);
+
+      simulation.on("tick", () => {
+        link
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+        node.attr("transform", d => `translate(${d.x},${d.y})`);
+      });
+
+      function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      function showInfo(event, d) {
+        document.getElementById("info-name").innerText = d.name;
+        document.getElementById("info-img").src = d.img;
+        document.getElementById("info-role").innerText =
+          d.role === "dean" ? "Декан" : d.role === "zam" ? "Зам. декана" : "Преподаватель";
+        document.getElementById("info-panel").classList.add("active");
+      }
+    }
+
+    loadStaff();
+  </script>
+</body>
+</html>
