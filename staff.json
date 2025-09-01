@@ -4,8 +4,8 @@
     "staff": [
       {"role": "dean", "img": "img/dean.png", "name": "??"},
       
-      {"role": "teacher", "img": "img/zxczapoy.png", "name": "Кими Старк"},
-      {"role": "teacher", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"}
+      {"role": "zam", "img": "img/zxczapoy.png", "name": "Кими Старк"},
+      {"role": "zam", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"},
 
       {"role": "teacher", "img": "img/toxic_2k72.png", "name": "Кейт Шэдоу"},
       {"role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ"},
@@ -37,6 +37,7 @@
     ]
   }
 ]
+
 
 
 
