@@ -20,7 +20,7 @@
       {"role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон"},
       {"role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт"},
       {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
-      {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"},
+      {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"}
     ]
   },
   {
@@ -37,6 +37,7 @@
     ]
   }
 ]
+
 
 
 
