@@ -14,10 +14,8 @@
       {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
       {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе"},
       {"role": "teacher", "img": "img/Boond007.png", "name": "Даниэль Кобблпот"},
-      {"role": "teacher", "img": "img/new_stalker3.png", "name": "Трафальгар Культапкин"},
       {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
       {"role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс"},
-      {"role": "teacher", "img": "img/Abrikos_ikk.png", "name": "Дин Орлеан-Лоусон"},
       {"role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт"},
       {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
       {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"}
@@ -37,6 +35,7 @@
     ]
   }
 ]
+
 
 
 
