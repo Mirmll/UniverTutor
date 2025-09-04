@@ -2,7 +2,7 @@
   {
     "range": "11.08.2025 – 11.09.2025",
     "staff": [
-      {"role": "dean", "img": "img/dean.png", "name": "??"},
+      {"role": "dean", "img": "img/KraiperFeed3.png", "name": "Энвер Уэйн"},
       
       {"role": "zam", "img": "img/zxczapoy.png", "name": "Кими Старк"},
       {"role": "zam", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"},
@@ -18,7 +18,9 @@
       {"role": "teacher", "img": "img/GamerProd.png", "name": "Такеши Мейс"},
       {"role": "teacher", "img": "img/Prosto_VaraG.png", "name": "Варвара Уайт"},
       {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
-      {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"}
+      {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"},
+      {"role": "teacher", "img": "img/ixar_ixar2009.png", "name": "Мэтью Мейс"},
+      {"role": "teacher", "img": "img/Miha2222.png", "name": "Михаил Рис"}
     ]
   },
   {
@@ -35,6 +37,7 @@
     ]
   }
 ]
+
 
 
 
