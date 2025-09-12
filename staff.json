@@ -28,15 +28,22 @@
     "staff": [
       {"role": "dean", "img": "img/zxczapoy.png", "name": "Кими Старк"},
       
-      {"role": "zam", "img": "img/zam1.png", "name": "??"},
+      {"role": "zam", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"},
       {"role": "zam", "img": "img/zam2.png", "name": "??"},
 
-      {"role": "teacher", "img": "img/teacher-a.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher-a.png", "name": "??"},
-      {"role": "teacher", "img": "img/teacher-b.png", "name": "??"}
+      {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
+      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
+      {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
+      {"role": "teacher", "img": "img/AnnetKariborro.png", "name": "Агнесс Фальконе"},
+      {"role": "teacher", "img": "img/ranger113.png", "name": "Кирилл Агнес-Степ"},
+      {"role": "teacher", "img": "img/askalinka_mf.png", "name": "Алия Блейз"},
+      {"role": "teacher", "img": "img/ixar_ixar2009.png", "name": "Мэтью Мейс"},
+      {"role": "teacher", "img": "img/3Be3Da.png", "name": "Виолетта Уэйн"},
+      {"role": "teacher", "img": "img/Miha2222.png", "name": "Михаил Рис"}
     ]
   }
 ]
+
 
 
 
