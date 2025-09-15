@@ -99,6 +99,66 @@
       color: #5b9cff;
       transform: scale(1.1)
     }
+    .videos {
+      display: grid;
+      gap: 20px;
+    }
+    @media (max-width: 599px) {
+      body {
+        font-size: 15px;
+      }
+
+      .wrap {
+        padding: 20px 14px;
+      }
+
+      .tips {
+        grid-template-columns: 1fr;
+      }
+
+      .videos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 📲 Планшеты */
+    @media (min-width: 600px) and (max-width: 991px) {
+      body {
+        font-size: 17px;
+      }
+
+      .wrap {
+        padding: 40px 30px;
+      }
+
+      .tips {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .videos {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* 💻 Компьютеры */
+    @media (min-width: 992px) {
+
+      .wrap {
+        padding: 50px;
+        max-width: 1200px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .tips {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .videos {
+        grid-template-columns: 1fr 1fr;
+      }
   </style>
 </head>
 
@@ -117,17 +177,30 @@
     <h1>Синхронизация Minecraft и Discord</h1>
     <p>Привяжите аккаунт Minecraft к Discord, чтобы получить роль автоматически и получить доступ к остальным каналам сервера.</p>
 
-    <div class="card">
-        <h2><i class="fa-solid fa-circle-info"></i> Инструкция</h2>
-      <ol>
+    <section class="videos">
+      <article id="video-2fa" class="card">
+        <h2>Видео: установка синхронизации</h2>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/EH6JOxDSSk4" title="Синхронизация — видео-инструкция"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <p class="muted">Если видео не отображается, откройте напрямую:
+          <a href="https://youtu.be/oN3Kg8NL-Hw" target="_blank"
+            rel="noopener noreferrer">https://youtu.be/EH6JOxDSSk4</a>
+        </p>
+        <h3>Пошаговая инструкция:</h3>
+        <ol class="steps">
         <li>Зайдите в <a href="https://discord.gg/8xSP8vRmN6" target="_blank">Discord</a> и напишите в <b>канале синхронизации</b> команду <code>!link</code>.</li>
-        <li>Бот отправит вам <span class="ok">секретный код</span> в ЛС.</li>
-        <li>Зайдите в Minecraft и введите команду:<br>
-          <code>/ranksync Discord ВАШ_КОД</code>
-        </li>
-        <li>Роль выдаётся <span class="ok">автоматически</span> после привязки.</li>
-      </ol>
-    </div>
+          <li>Зайдите в <b>Лобби</b> и введите команду <code>/2fa</code>.</li>
+          <li>Бот отправит вам <span class="ok">секретный код</span> в ЛС.</li>
+          <li>Зайдите в Minecraft и введите команду:<br>
+            <code>/ranksync Discord ВАШ_КОД</code>
+            </li>
+          <li>Роль выдаётся <span class="ok">автоматически</span> после привязки.</li>
+        </ol>
+      </article>
+    </section>
 
     <div class="card">
       <h2><i class="fa-solid fa-question"></i> Вопросы и ответы</h2>
@@ -151,4 +224,5 @@
   </footer>
 </body>
 </html>
+
 
