@@ -1,6 +1,7 @@
 [
   {
     "range": "11.08.2025 – 11.09.2025",
+    "active": false,
     "staff": [
       {"role": "dean", "img": "img/KraiperFeed3.png", "name": "Энвер Уэйн"},
       
@@ -25,6 +26,7 @@
   },
   {
     "range": "11.09.2025 – 11.10.2025",
+    "active": true,
     "staff": [
       {"role": "dean", "img": "img/zxczapoy.png", "name": "Кими Старк"},
       
@@ -46,6 +48,7 @@
     ]
   }
 ]
+
 
 
 
