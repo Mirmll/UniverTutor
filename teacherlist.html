@@ -13,6 +13,7 @@
       z-index: -1;
       background: transparent;
     }
+
     :root {
       --bg: #0f1115;
       --card: #171924;
@@ -30,36 +31,37 @@
       flex-direction: column;
       min-height: 100vh;
     }
+
     header {
-  background: #171924;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
-  flex-wrap: wrap;
-}
+      background: #171924;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+      flex-wrap: wrap;
+    }
 
-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
 
-nav {
-  margin-top: 10px;
-}
+    nav {
+      margin-top: 10px;
+    }
 
-nav a {
-  color: #f1f1f1;
-  text-decoration: none;
-  margin: 6px 12px;
-  font-weight: bold;
-  display: inline-block;
-}
+    nav a {
+      color: #f1f1f1;
+      text-decoration: none;
+      margin: 6px 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
 
-nav a:hover {
-  color: #ffcc66;
-}
+    nav a:hover {
+      color: #ffcc66;
+    }
 
     main {
       flex: 1;
@@ -228,27 +230,27 @@ nav a:hover {
       }
 
       header {
-    flex-direction: column;
-    text-align: center;
-  }
+        flex-direction: column;
+        text-align: center;
+      }
 
-  nav {
-    margin-top: 12px;
-  }
+      nav {
+        margin-top: 12px;
+      }
 
-  nav a {
-    margin: 8px;
-    font-size: 15px;
-  }
+      nav a {
+        margin: 8px;
+        font-size: 15px;
+      }
 
     }
+
     footer {
       background: #141828;
       border-top: 1px solid #23273a;
       padding: 20px;
       text-align: center;
     }
-  
   </style>
 </head>
 
@@ -325,7 +327,17 @@ nav a:hover {
         container.appendChild(slide);
       });
 
-      showSlide(0);
+      let activeIndex = 0;
+      let found = false;
+
+      data.forEach((period, index) => {
+        if (period.active && !found) {
+          activeIndex = index;
+          found = true;
+        }
+      });
+
+      showSlide(activeIndex);
     }
 
     function showSlide(i) {
