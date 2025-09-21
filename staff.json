@@ -31,7 +31,7 @@
       {"role": "dean", "img": "img/zxczapoy.png", "name": "Кими Старк"},
       
       {"role": "zam", "img": "img/Anim_Maj.png", "name": "Мария Кавасаки"},
-      {"role": "teacher", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
+      {"role": "zam", "img": "img/klybhuzka.png", "name": "Ирина Коркина-Коннелли"},
 
       {"role": "teacher", "img": "img/AkAi_KyOui.png", "name": "Эвелина Алакрити"},
       {"role": "teacher", "img": "img/katixw.png", "name": "Лаура Рис-Форджер"},
@@ -47,6 +47,7 @@
     ]
   }
 ]
+
 
 
 
