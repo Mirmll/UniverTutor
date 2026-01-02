@@ -149,37 +149,37 @@
       background: #23273a;
       margin: 22px 0
     }
+    
+    header {
+      background: #171924;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+      flex-wrap: wrap;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    
+    nav {
+      margin-top: 10px;
+    }
+    
+    nav a {
+      color: #f1f1f1;
+      text-decoration: none;
+      margin: 6px 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
 
-   header {
-  background: #171924;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
-  flex-wrap: wrap;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-nav {
-  margin-top: 10px;
-}
-
-nav a {
-  color: #f1f1f1;
-  text-decoration: none;
-  margin: 6px 12px;
-  font-weight: bold;
-  display: inline-block;
-}
-
-nav a:hover {
-  color: #ffcc66;
-}
+    nav a:hover {
+      color: #ffcc66;
+    }
     .links {
       display: flex;
       justify-content: center;
@@ -205,13 +205,11 @@ nav a:hover {
       text-align: center;
     }
 
-    /* Видео-блоки рядом */
     .videos {
       display: grid;
       gap: 20px;
     }
 
-    /* 📱 Телефоны */
     @media (max-width: 599px) {
       body {
         font-size: 15px;
@@ -230,7 +228,6 @@ nav a:hover {
       }
     }
 
-    /* 📲 Планшеты */
     @media (min-width: 600px) and (max-width: 991px) {
       body {
         font-size: 17px;
@@ -249,7 +246,6 @@ nav a:hover {
       }
     }
 
-    /* 💻 Компьютеры */
     @media (min-width: 992px) {
 
       .wrap {
@@ -378,6 +374,7 @@ nav a:hover {
 </body>
 
 </html>
+
 
 
 
