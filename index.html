@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Университет RPM West</title>
+  <title>Университет RPM</title>
   <link rel="icon" href="img/UniLogo.png" type="image/png">
   <style>
     :root {
@@ -327,16 +327,18 @@
         </p>
         <h3>Пошаговая инструкция:</h3>
         <ol class="steps">
-          <li>Скачайте приложение-аутентификатор:
-            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
-              target="_blank">Google Authenticator</a>,
+          <li>Подготовьте аутентификатор. Рекомендуем установить приложение <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pcampaignid=web_share" target="_blank">Google Authenticator</a> на телефон, либо использовать расширение для браузера <a href="https://chromewebstore.google.com/detail/bhghoamapcdpbohphigoooaddinpkbai?utm_source=item-share-cb" target="_blank">Аутентификатор</a>.</li>
+          <li>Зайдите в <b>Лобби</b> и введите команду <code>/totp add</code> (или <code>/2fa add</code>).</li>
+          <li>В чате появится ответ от сервера:<br>
+            <small style="color: var(--ok);">RPM &gt; Ваш секретный код &lt;длинный код&gt;. Отсканируйте QR код по ссылке: &lt;ссылка&gt;</small>
           </li>
-          <li>Зайдите в <b>Лобби</b> и введите команду <code>/2fa</code>.</li>
-          <li>Вам выдастся QR-код — отсканируйте его через приложение.</li>
-          <li>В приложении появится 6-значный код. Введите его в лобби командой <code>/2fa XXXXXX</code>.
-          </li>
-          <li>Готово! Теперь при входе вам потребуется вводить код из приложения</li>
+          <li>Отсканируйте полученный QR-код через мобильное приложение или введите длинный секретный код вручную в расширение браузера.</li>
+          <li>В приложении сгенерируется 6-значный код. Подтвердите привязку в игре, введя команду <code>/2fa confirm XXXXXX</code> (пишите код без пробелов).</li>
+          <li><b>Готово!</b> Теперь при каждом входе в игру вам потребуется вводить актуальный код из приложения с помощью команды <code>/2fa code &lt;код&gt;</code>.</li>
         </ol>
+        <p class="muted" style="margin-top: 14px; border-top: 1px solid #23273a; padding-top: 10px;">
+          Чтобы полностью удалить защиту 2FA, используйте команду: <code>/2fa remove &lt;код&gt;</code>
+        </p>
       </article>
 
       <article id="video-tgprotect" class="card">
@@ -358,6 +360,9 @@
           <li>При входе в игру бот пришлёт уведомление. Нажмите кнопку <b>«Это я»</b>, чтобы подтвердить вход.</li>
           <li>Теперь ваш аккаунт защищён: никто не сможет войти без вашего подтверждения в Telegram.</li>
         </ol>
+        <p class="muted" style="margin-top: 14px; border-top: 1px solid #23273a; padding-top: 10px; color: #ff6b6b;">
+          <b style="color: #ff8f8f;">Важно:</b> отвязать TG Protect в будущем (например, при утере доступа к аккаунту Telegram) можно <u>только</u> через нашу <a href="https://t.me/rpmsupport_bot" target="_blank" style="color: var(--accent);">техподдержку</a>.
+        </p>
       </article>
     </section>
 
@@ -374,13 +379,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
