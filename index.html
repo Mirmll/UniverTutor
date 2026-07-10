@@ -32,16 +32,17 @@
     }
 
     .wrap {
-      max-width: 980px;
-      margin: auto;
-      padding: 32px 20px
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      width: 100%;
     }
 
     h1,
     h2,
     h3 {
       line-height: 1.2;
-      margin: 0 0 12px
+      margin: 0 0 16px
     }
 
     h1 {
@@ -50,7 +51,12 @@
 
     h2 {
       font-size: clamp(18px, 2.2vw, 24px);
-      margin-top: 28px
+      margin-top: 10px
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 20px;
     }
 
     p {
@@ -62,16 +68,18 @@
       background: var(--card);
       border: 1px solid #222536;
       border-radius: 16px;
-      padding: 18px 18px 6px;
+      padding: 24px 24px 20px;
       margin: 16px 0;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, .25)
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .25);
+      display: flex;
+      flex-direction: column;
     }
 
     .badges {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin: 8px 0 0
+      margin: 8px 0 16px
     }
 
     .badge {
@@ -88,15 +96,19 @@
       margin: 8px 0 12px 22px
     }
 
+    li {
+      margin-bottom: 6px;
+    }
+
     .tips {
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
     }
 
     .tip {
       border-left: 3px solid var(--accent);
-      padding: 10px 12px;
+      padding: 12px 16px;
       background: #141828;
       border-radius: 10px
     }
@@ -108,15 +120,32 @@
 
     .video {
       position: relative;
-      aspect-ratio: 16/9;
       width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid #24283a;
-      margin: 10px 0 2px
+      margin: 12px 0;
     }
 
-    iframe {
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      margin: 12px 0;
+      padding-bottom: 177.77%;
+      height: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #24283a;
+    }
+
+    .video iframe,
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: 0
@@ -127,32 +156,26 @@
       font-size: 13px
     }
 
+    .muted a {
+      color: var(--accent);
+      word-break: break-all;
+    }
+
     .grid {
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
     }
 
-    .cta {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 12px;
-      margin-top: 8px;
-      font-weight: 600
-    }
-
     .sep {
       height: 1px;
       background: #23273a;
-      margin: 22px 0
+      margin: 32px 0
     }
     
     header {
       background: #171924;
-      padding: 15px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -166,24 +189,26 @@
     }
     
     nav {
-      margin-top: 10px;
+      margin-top: 0;
     }
     
     nav a {
       color: #f1f1f1;
       text-decoration: none;
-      margin: 6px 12px;
+      margin-left: 20px;
       font-weight: bold;
       display: inline-block;
+      transition: color 0.2s;
     }
 
     nav a:hover {
       color: #ffcc66;
     }
+
     .links {
       display: flex;
       justify-content: center;
-      gap: 18px;
+      gap: 24px;
       flex-wrap: wrap
     }
 
@@ -201,35 +226,19 @@
     footer {
       background: #141828;
       border-top: 1px solid #23273a;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
+      margin-top: auto;
     }
 
     .videos {
       display: grid;
-      gap: 20px;
+      gap: 24px;
+      align-items: start;
     }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  margin: 0 auto;
-  padding-bottom: 177.77%;
-  height: 0;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-    @media (max-width: 599px) {
+    /* Адаптивные медиа-запросы */
+    @media (max-width: 767px) {
       body {
         font-size: 15px;
       }
@@ -238,55 +247,32 @@
         padding: 20px 14px;
       }
 
-      .tips {
-        grid-template-columns: 1fr;
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 0 10px;
       }
 
       .videos {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (min-width: 600px) and (max-width: 991px) {
-      body {
-        font-size: 17px;
-      }
-
-      .wrap {
-        padding: 40px 30px;
-      }
-
-      .tips {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .videos {
-        grid-template-columns: 1fr 1fr;
+      .video-container {
+        margin: 12px auto;
       }
     }
 
-    @media (min-width: 992px) {
-
-      .wrap {
-        padding: 50px;
-        max-width: 1200px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .tips {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
+    @media (min-width: 768px) {
       .videos {
         grid-template-columns: 1fr 1fr;
       }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
 </head>
 
 <body>
@@ -298,11 +284,9 @@
     </nav>
   </header>
 
-
   <main class="wrap">
     <h1>2FA и TG Protect</h1>
-    <p>Ниже кратко о пользе, базовые шаги и видео-инструкции. Страница подходит для ознакомления студентам сервера
-      RPMRolePlay.</p>
+    <p>Ниже кратко о пользе, базовые шаги и видео-инструкции. Страница подходит для ознакомления студентам сервера RPMRolePlay.</p>
 
     <div class="card">
       <h2>Зачем это нужно</h2>
@@ -310,7 +294,7 @@
         <span class="badge">Защита от взлома</span>
         <span class="badge">Дополнительная защита даже если пароль стал известен другим людям</span>
       </div>
-      <div class="tips" style="margin-top:10px">
+      <div class="tips">
         <div class="tip">
           <strong>2FA (двухфакторная аутентификация)</strong>
           <ul>
@@ -336,24 +320,21 @@
       <article id="video-2fa" class="card">
         <h2>Видео: настройка 2FA</h2>
         <div class="video-container">
-  <iframe src="https://www.youtube.com/embed/YIfEKYXao4w" title="2FA — видео-инструкция"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen></iframe>
-</div>
+          <iframe src="https://www.youtube.com/embed/YIfEKYXao4w" title="2FA — видео-инструкция" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <p class="muted">Если видео не отображается, откройте напрямую:
-          <a href="https://youtube.com/shorts/YIfEKYXao4w?si=F1rxEM8dyOnQ8ONJ" target="_blank"
-            rel="noopener noreferrer">https://youtube.com/shorts/YIfEKYXao4w?si=F1rxEM8dyOnQ8ONJ</a>
+          <a href="https://youtube.com/shorts/YIfEKYXao4w" target="_blank" rel="noopener noreferrer">ссылка на Shorts</a>
         </p>
         <h3>Пошаговая инструкция:</h3>
         <ol class="steps">
-          <li>Подготовьте аутентификатор. Рекомендуем установить приложение <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pcampaignid=web_share" target="_blank">Google Authenticator</a> на телефон, либо использовать расширение для браузера <a href="https://chromewebstore.google.com/detail/bhghoamapcdpbohphigoooaddinpkbai?utm_source=item-share-cb" target="_blank">Аутентификатор</a>.</li>
+          <li>Подготовьте аутентификатор. Рекомендуем установить приложение <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Google Authenticator</a> на телефон, либо использовать расширение для браузера <a href="https://chromewebstore.google.com/detail/bhghoamapcdpbohphigoooaddinpkbai" target="_blank">Аутентификатор</a>.</li>
           <li>Зайдите в <b>Лобби</b> и введите команду <code>/totp add</code> (или <code>/2fa add</code>).</li>
           <li>В чате появится ответ от сервера:<br>
-            <small style="color: var(--ok);">RPM &gt; Ваш секретный код &lt;длинный код&gt;. Отсканируйте QR код по ссылке: &lt;ссылка&gt;</small>
+            <small style="color: var(--ok);">RPM &gt; Ваш секретный код &lt;длинный код&gt;. Отсканируйте QR код по ссылке</small>
           </li>
-          <li>Отсканируйте полученный QR-код через мобильное приложение или введите длинный секретный код вручную в расширение браузера.</li>
-          <li>В приложении сгенерируется 6-значный код. Подтвердите привязку в игре, введя команду <code>/2fa confirm XXXXXX</code> (пишите код без пробелов).</li>
-          <li><b>Готово!</b> Теперь при каждом входе в игру вам потребуется вводить актуальный код из приложения с помощью команды <code>/2fa code &lt;код&gt;</code>.</li>
+          <li>Отсканируйте полученный QR-код через мобильное приложение или введите код вручную.</li>
+          <li>В приложении сгенерируется 6-значный код. Подтвердите привязку в игре: <code>/2fa confirm XXXXXX</code>.</li>
+          <li><b>Готово!</b> Теперь при каждом входе потребуется вводить актуальный код: <code>/2fa code &lt;код&gt;</code>.</li>
         </ol>
         <p class="muted" style="margin-top: 14px; border-top: 1px solid #23273a; padding-top: 10px;">
           Чтобы полностью удалить защиту 2FA, используйте команду: <code>/2fa remove &lt;код&gt;</code>
@@ -363,13 +344,10 @@
       <article id="video-tgprotect" class="card">
         <h2>Видео: настройка TG Protect</h2>
         <div class="video">
-          <iframe src="https://www.youtube.com/embed/PMLP_hVVNAs" title="TG Protect — видео-инструкция"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/PMLP_hVVNAs" title="TG Protect — видео-инструкция" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <p class="muted">Если видео не отображается, откройте напрямую:
-          <a href="https://youtu.be/PMLP_hVVNAs" target="_blank"
-            rel="noopener noreferrer">https://youtu.be/PMLP_hVVNAs</a>
+          <a href="https://youtu.be/PMLP_hVVNAs" target="_blank" rel="noopener noreferrer">ссылка на YouTube</a>
         </p>
         <h3>Пошаговая инструкция:</h3>
         <ol class="steps">
@@ -380,7 +358,7 @@
           <li>Теперь ваш аккаунт защищён: никто не сможет войти без вашего подтверждения в Telegram.</li>
         </ol>
         <p class="muted" style="margin-top: 14px; border-top: 1px solid #23273a; padding-top: 10px; color: #ff6b6b;">
-          <b style="color: #ff8f8f;">Важно:</b> отвязать TG Protect в будущем (например, при утере доступа к аккаунту Telegram) можно <u>только</u> через нашу <a href="https://t.me/rpmsupport_bot" target="_blank" style="color: var(--accent);">техподдержку</a>.
+          <b style="color: #ff8f8f;">Важно:</b> отвязать TG Protect в будущем можно <u>только</u> через нашу <a href="https://t.me/rpmsupport_bot" target="_blank" style="color: var(--accent);">техподдержку</a>.
         </p>
       </article>
     </section>
