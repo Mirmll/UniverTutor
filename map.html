@@ -197,69 +197,75 @@
             {
                 id: 1,
                 name: "Мэрия",
-                coords: [1870, 1793],
+                coords: [13459, 10137],
                 color: "#ffcc00"
             },
             {
                 id: 2,
                 name: "Больница",
-                coords: [2027, 1834],
+                coords: [14350, 10380],
                 color: "#ff0000"
             },
             {
                 id: 3,
                 name: "Армия",
-                coords: [2052, 1810],
+                coords: [14492, 10243],
                 color: "#ff3c00"
             },
             {
                 id: 4,
                 name: "СМИ",
-                coords: [1945, 1835],
+                coords: [13882, 10379],
                 color: "#109e00"
             },
             {
                 id: 5,
                 name: "Полиция",
-                coords: [1822, 1898],
+                coords: [13188, 10740],
                 color: "#0004ff"
             },
             {
                 id: 6,
                 name: "Опасный район",
-                coords: [1973, 1991],
+                coords: [14043, 11264],
                 color: "#000000"
             },
             {
                 id: 7,
                 name: "Университет",
-                coords: [1698, 1983],
+                coords: [12483, 11212],
                 color: "#ff8400"
             },
             {
                 id: 8,
                 name: "FBI",
-                coords: [1901, 2382],
+                coords: [13638, 13460],
                 color: "#0f0085"
             },
             {
                 id: 9,
                 name: "Бар",
-                coords: [1860, 1278],
+                coords: [13411, 7224],
                 color: "#70ff73"
             },
             {
                 id: 10,
                 name: "Библиотека",
-                coords: [1445, 1904],
+                coords: [11059, 10770],
                 color: "#b8b8b8"
             }
         ];
+
+        function getMapLatLng(coords) {
+            return map.unproject([coords[1], imgHeight - coords[0]], map.getMaxZoom());
+        }
 
         const markersMap = {};
         const panelContainer = document.getElementById('bottom-panel');
 
         locations.forEach(place => {
+            const latLngCoords = getMapLatLng(place.coords);
+
             const customIcon = L.divIcon({
                 className: 'custom-marker',
                 html: `<div class="marker-pin" style="background-color: ${place.color}; box-shadow: 0 0 12px ${place.color};"></div>`,
@@ -273,7 +279,7 @@
                 </div>
             `;
 
-            const marker = L.marker(place.coords, { icon: customIcon })
+            const marker = L.marker(latLngCoords, { icon: customIcon })
                 .bindPopup(popupContent, { offset: [0, -5] })
                 .addTo(map);
 
@@ -286,7 +292,7 @@
             `;
 
             card.addEventListener('click', () => {
-                map.setView(place.coords, 0.5, { animate: true, duration: 1 });
+                map.setView(latLngCoords, 0.5, { animate: true, duration: 1 });
                 setTimeout(() => {
                     marker.openPopup();
                 }, 400);
